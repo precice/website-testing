@@ -1,0 +1,4 @@
+<map id="precice::mesh::Triangle::getEnclosingRadius" name="precice::mesh::Triangle::getEnclosingRadius">
+<area shape="rect" id="node1" title="Returns the radius of the circle enclosing the triangle." alt="" coords="5,5,177,47"/>
+<area shape="rect" id="node2" href="$classprecice_1_1mesh_1_1Triangle.html#ae118df04a6ce11d08547611128074d73" title="Returns the barycenter of the triangle." alt="" coords="225,5,397,47"/>
+</map>

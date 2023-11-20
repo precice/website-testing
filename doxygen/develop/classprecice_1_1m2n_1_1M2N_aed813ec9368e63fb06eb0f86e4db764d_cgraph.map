@@ -1,0 +1,5 @@
+<map id="precice::m2n::M2N::receive" name="precice::m2n::M2N::receive">
+<area shape="rect" id="node1" title=" " alt="" coords="5,27,157,69"/>
+<area shape="rect" id="node2" href="$namespaceprecice.html#aa9d19e0a82fdcbffc72e0db264b4cceb" title=" " alt="" coords="249,5,348,32"/>
+<area shape="rect" id="node3" href="$classprecice_1_1utils_1_1IntraComm.html#abde303b11e46851ae65dca65ef06daad" title="True if this process is running a secondary rank." alt="" coords="205,57,392,98"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="precice::testing::TestContext::~TestContext" name="precice::testing::TestContext::~TestContext">
+<area shape="rect" id="node1" title=" " alt="" coords="5,201,212,243"/>
+<area shape="rect" id="node2" href="$classprecice_1_1utils_1_1Petsc.html#ab9cb75bb28bc602f4ef5e76911f9cc9b" title="Finalizes Petsc environment." alt="" coords="279,5,427,47"/>
+<area shape="rect" id="node3" href="$classprecice_1_1profiling_1_1EventRegistry.html#a4e1bb8d0019a55bfd954568ba32c2910" title="Sets the global end time and flushes buffers." alt="" coords="266,71,441,112"/>
+<area shape="rect" id="node4" href="$classprecice_1_1utils_1_1IntraComm.html#a7daafddc884c6dc168e2add48733cde4" title="Intra&#45;participant communication." alt="" coords="260,136,447,177"/>
+<area shape="rect" id="node5" href="$classprecice_1_1profiling_1_1EventRegistry.html#a0a1555e6211794ef23fcaf7a4f41950d" title="Returns the only instance (singleton) of the EventRegistry class." alt="" coords="262,201,445,243"/>
+<area shape="rect" id="node6" href="$classprecice_1_1utils_1_1IntraComm.html#a410aa0da36d7268d5501465e49912608" title=" " alt="" coords="260,267,447,308"/>
+<area shape="rect" id="node7" href="$classprecice_1_1utils_1_1Parallel.html#a1c1615a4226312e45205bcff9120ca84" title=" " alt="" coords="273,332,434,373"/>
+<area shape="rect" id="node9" href="$classprecice_1_1utils_1_1Parallel.html#a5b33045a382a5849aff225f294552138" title=" " alt="" coords="273,397,434,439"/>
+<area shape="rect" id="node8" href="$structprecice_1_1utils_1_1Parallel_1_1CommState.html#a11c87f5cfaad1fb984d9dcd80e6f2c55" title="returns a commstate containing MPI_COMM_WORLD" alt="" coords="495,332,656,373"/>
+</map>

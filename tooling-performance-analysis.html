@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="preCICE comes with an internal performance analysis framework">
+
+<meta name="keywords" content=" tooling, json, performance, events, analysis, cpu time, hpc, profiling">
+<meta name="theme-color" content="#0A76BB">
+<meta name="msapplication-square310x310logo" content="images/icon-310x310.png">
+
+<title>Performance analysis | preCICE - The Coupling Library</title>
+<link rel="alternate" type="application/rss+xml" title="" href="https://precice.org/feed.xml">
+
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="stylesheet" href="css/syntax.css">
+<link rel="icon" sizes="192x192" href="images/icon.png">
+<link rel="apple-touch-icon" sizes="310x310" href="images/icon-310x310.png">
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+
+<!-- Bootstrap -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Local CSS -->
+<link rel="stylesheet" href="css/modern-business.css">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/customstyles-precice.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+<link rel="stylesheet" href="css/bookcover.css">
+<!-- Color styles -->
+<link rel="stylesheet" href="css/theme-precice.css">
+<!-- Styling for landing page -->
+
+
+<!-- Jquery, Ajax -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js"></script>
+
+<!-- Anchor.js -->
+<script src="https://cdn.jsdelivr.net/npm/anchor-js@4.2.0/anchor.min.js" integrity="sha256-m1eTvwEHwmsw4+XKF7BshClVJEPwTVycveNl0CS0Mkk=" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JavaScript (requires jquery) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<!-- Local JS -->
+<script src="js/jquery.navgoco.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- KaTeX -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+<!-- Algolia search -->
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.20.1/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css">
+
+<!-- QR code to retrieve printed page -->
+<style>
+@media print {
+    div.post-header:before {
+    	content: url('https://chart.googleapis.com/chart?cht=qr&chs=100x100&chl=https://precice.org/tooling-performance-analysis.html&choe=UTF-8');
+        margin-top: -25px;
+        float: right;
+    }
+}
+</style>
+
+<!-- Plausible Analytics -->
+<script async defer data-domain="precice.org" src="https://plausible.io/js/plausible.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    <script>
+        // wrap tables into a div to make them scrollable on small viewports
+        // https://getbootstrap.com/docs/3.4/css/#tables-responsive
+        $(document).ready(function() {
+            $('table').addClass('table');
+            $('table').wrap('<div class="table-responsive"></div>');
+        });
+    </script>
+    
+</head>
+<body>
+    <header>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+            <span class="navbar-brand-icon">
+            <img class="navbar-brand-text" src="images/preCICE_text_28px.svg" alt="preCICE"></span>
+            </a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                
+                <!-- entries without drop-downs appear here -->
+
+                
+                
+
+                
+                
+                
+                
+                
+                <li><a href="quickstart.html">Quickstart</a></li>
+                
+                
+                
+                
+                
+                <li class="active"><a href="docs.html">Docs</a></li>
+                
+                
+                
+                
+                
+                <li><a href="tutorials.html">Tutorials</a></li>
+                
+                
+                
+                
+                
+                <li><a href="community.html">Community</a></li>
+                
+                
+                
+                
+                
+                <li><a href="https://precice.discourse.group/c/news" target="_blank" rel="noopener">Blog</a></li>
+                
+                
+                
+                
+                
+                <li><a href="about.html">About</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <div id="search-input"></div>
+                        <div id="search-results"></div>
+                        <script>
+const algoliaSearch = instantsearch({
+  appId: 'I5M4FAJYBH',
+  apiKey: 'd6f8d2f113bc342ee3f42421d0153bad',
+  indexName: 'jekyll',
+  searchFunction: function(helper) {          // hide search result in init query
+    var searchResults = $('#search-results');
+    if (helper.state.query === '') {
+      searchResults.hide();
+      return;
+    }
+    helper.search();
+    searchResults.show();
+  }
+});
+
+const hitTemplate = function(hit) {
+  let date = '';
+  if (hit.date) {
+    date = moment.unix(hit.date).format('MMM D, YYYY');
+  }
+
+  let url = `${hit.url}#${hit.anchor}`;
+
+  const title = hit._highlightResult.title.value;
+
+  let breadcrumbs = '';
+  if (hit._highlightResult.headings) {
+    breadcrumbs = hit._highlightResult.headings.map(match => {
+      return `<span class="result-breadcrumb">${match.value}</span>`
+    }).join(' > ')
+  }
+
+  const content = hit._highlightResult.html.value;
+
+  return `
+    <div class="result-item">
+    <h2><a class="result-link" href="${url}">${title}</a></h2>
+    <a href="${url}" class="result-breadcrumbs">${breadcrumbs}</a>
+    <div class="result-snippet">${content}</div>
+    </div>
+  `;
+}
+
+algoliaSearch.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '#search-input',
+    placeholder: 'Search ...',
+    poweredBy: true, // This is required if you're on the free Community plan
+    magnifier: false,
+    autofocus: false,
+    searchOnEnterKeyPressOnly: false,
+    reset: true
+  })
+);
+
+algoliaSearch.addWidget(
+  instantsearch.widgets.hits({
+    container: '#search-results',
+    templates: {
+      item: hitTemplate
+    }
+  })
+);
+
+algoliaSearch.start();
+
+// Patch the style of the search input bar generated by the above script
+// The equivalent CSS is below, however, including <style> in <body> is against the W3C commandments
+// Chrome and Firefox had baby called scope, but it didn't make it
+// https://stackoverflow.com/questions/2830296/using-style-tags-in-the-body-with-other-html
+var elem = document.querySelector('.ais-search-box--powered-by');
+elem.style.marginTop = '-15px';
+elem.style.paddingRight = '5px';
+
+var elem = document.querySelector('.nav li a.ais-search-box--powered-by-link');
+elem.style.padding = '0';
+elem.style.backgroundColor = 'transparent';
+elem.style.display = "inline-block";
+
+var elem = document.querySelector('.ais-search-box--input');
+elem.style.paddingLeft = '10px';
+elem.style.borderColor = '#0A76BB';
+
+var elem = document.querySelector('.ais-search-box');
+elem.style.padding = '.5em';
+elem.style.marginBottom = '0px';
+elem.style.marginLeft = '10px';
+elem.style.marginTop = '0px';
+elem.style.width = '20em';
+elem.style.fontSize = '0.8em';
+elem.style.height = '50px';
+elem.style.boxSizing = 'border-box';
+
+/*<style type="text/css">
+.ais-search-box--powered-by {
+  margin-top: -15px;
+  padding-right: 5px;
+}
+.nav li a.ais-search-box--powered-by-link {
+  padding: 0;
+  background-color: transparent;
+  display: inline-block;
+}
+.ais-search-box--input {
+  padding-left: 10px;
+  border-color: #0A76BB;
+}
+.ais-search-box {
+  padding: .5em;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  margin-top: 0px;
+  width: 20em;
+  font-size: 0.8em;
+  box-sizing: border-box;
+  height: 50px;
+}
+</style>*/
+
+// some hacky JS to hide the search results until we move to docsearch (which is a true autocomplete-type search)
+document.addEventListener('mouseup', function(e) {
+  var results = document.getElementById('search-results');
+  if (!results.contains(e.target)) {
+    results.style.display = 'none';
+  }
+});
+document.addEventListener('mouseup', function(e) {
+  var input = document.getElementById('search-input');
+  var results = document.getElementById('search-results');
+  if (input.contains(e.target)) {
+    results.style.display = 'block';
+  }
+});
+
+</script>
+                    </div>
+                    <!--end search-->
+                </li>
+                <li>
+                    <a class="no-icon nav-external" href="https://precice.discourse.group" target="_blank" data-show-count="false" aria-label="Join the discourse community"><i class="fab fa-discourse"></i></a>
+                </li>
+                <li>
+                    <a class="no-icon nav-external" href="https://github.com/precice/precice" target="_blank" data-show-count="false" aria-label="Star precice/precice on GitHub"><i class="fab fa-github"></i></a>
+                </li>
+                <li>
+                    <a class="no-icon nav-external" href="https://twitter.com/preCICE_org" target="_blank" data-show-count="false" aria-label="Follow us on Twitter"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li>
+                    <!-- rel="me" required by Mastodon for verification -->
+                    <a rel="me" class="no-icon nav-external" href="https://fosstodon.org/@precice" target="_blank" data-show-count="false" aria-label="Follow us on Mastodon"><i class="fab fa-mastodon"></i></a>
+                </li>
+                <li>
+                    <a class="no-icon nav-external" href="https://www.youtube.com/c/preCICECoupling/" target="_blank" data-show-count="false" aria-label="Subscribe on Youtube"><i class="fab fa-youtube"></i></a>
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+    </header>
+    <main>
+          <!-- News banner -->
+          
+
+
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                    <!-- Sidebar Column -->
+                    <div class="col-md-3" id="tg-sb-sidebar">
+                        
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">Docs v2.5.0</li>
+  
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Fundamentals" href="#">Fundamentals</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="docs.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Terminology" href="fundamentals-terminology.html">Terminology</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Literature guide" href="fundamentals-literature-guide.html">Literature guide</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Roadmap" href="fundamentals-roadmap.html">Roadmap</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Previous versions" href="fundamentals-previous-versions.html">Previous versions</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Installation" href="#">Installation</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="installation-overview.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="System packages" href="installation-packages.html">System packages</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Using Spack" href="installation-spack.html">Using Spack</a></li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Building from source" href="#">Building from source</a>
+        <ul>
+          
+          
+          
+          <li><a title="Preparation" href="installation-source-preparation.html">Preparation</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Dependencies" href="installation-source-dependencies.html">Dependencies</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Configuration" href="installation-source-configuration.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Building" href="installation-source-building.html">Building</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Testing" href="installation-source-testing.html">Testing</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Installation" href="installation-source-installation.html">Installation</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Finding" href="installation-source-finding.html">Finding</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Advanced" href="installation-source-advanced.html">Advanced</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Troubleshooting" href="installation-source-troubleshooting.html">Troubleshooting</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Notes on CMake" href="installation-source-cmake.html">Notes on CMake</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Linking to preCICE" href="installation-linking.html">Linking to preCICE</a></li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Language bindings" href="#">Language bindings</a>
+        <ul>
+          
+          
+          
+          <li><a title="Fortran" href="installation-bindings-fortran.html">Fortran</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Python" href="installation-bindings-python.html">Python</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Matlab" href="installation-bindings-matlab.html">Matlab</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Julia" href="installation-bindings-julia.html">Julia</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Rust" href="installation-bindings-rust.html">Rust</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Special systems" href="installation-special-systems.html">Special systems</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Demo Virtual Machine" href="installation-vm.html">Demo Virtual Machine</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="preCICE distribution" href="installation-distribution.html">preCICE distribution</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Configuration" href="#">Configuration</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="configuration-overview.html">Overview</a></li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Basics" href="#">Basics</a>
+        <ul>
+          
+          
+          
+          <li><a title="Introduction" href="configuration-introduction.html">Introduction</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Mapping" href="configuration-mapping.html">Mapping</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Communication" href="configuration-communication.html">Communication</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Coupling scheme" href="configuration-coupling.html">Coupling scheme</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Acceleration" href="configuration-acceleration.html">Acceleration</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Mesh exchange example" href="configuration-coupling-mesh-exchange.html">Mesh exchange example</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Advanced topics" href="#">Advanced topics</a>
+        <ul>
+          
+          
+          
+          <li><a title="Multi coupling" href="configuration-coupling-multi.html">Multi coupling</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Logging" href="configuration-logging.html">Logging</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Export" href="configuration-export.html">Export</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Action" href="configuration-action.html">Action</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Watchpoint" href="configuration-watchpoint.html">Watchpoint</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Watch integral" href="configuration-watchintegral.html">Watch integral</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li><a title="XML reference" href="configuration-xml-reference.html">XML reference</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Tooling" href="#">Tooling</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="tooling-overview.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Artificial solver testing environment (ASTE)" href="tooling-aste.html">Artificial solver testing environment (ASTE)</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Built-in tooling" href="tooling-builtin.html">Built-in tooling</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Config visualization" href="tooling-config-visualization.html">Config visualization</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="FMI runner" href="tooling-fmi-runner.html">FMI runner</a></li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Micro Manager" href="#">Micro Manager</a>
+        <ul>
+          
+          
+          
+          <li><a title="Overview" href="tooling-micro-manager-overview.html">Overview</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Get the Micro Manager" href="tooling-micro-manager-installation.html">Get the Micro Manager</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Preparing micro simulation" href="tooling-micro-manager-prepare-micro-simulation.html">Preparing micro simulation</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Configuration" href="tooling-micro-manager-configuration.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Running" href="tooling-micro-manager-running.html">Running</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li class="active"><a title="Performance analysis" href="tooling-performance-analysis.html">Performance analysis</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="RBF shape calculator" href="tooling-rbf-shape.html">RBF shape calculator</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Provided adapters" href="#">Provided adapters</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="adapters-overview.html">Overview</a></li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="OpenFOAM" href="#">OpenFOAM</a>
+        <ul>
+          
+          
+          
+          <li><a title="Overview" href="adapter-openfoam-overview.html">Overview</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Get the adapter" href="adapter-openfoam-get.html">Get the adapter</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Configuration" href="adapter-openfoam-config.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Extending" href="adapter-openfoam-extend.html">Extending</a></li>
+          
+          
+          
+          
+          
+          <li><a title="OpenFOAM support" href="adapter-openfoam-support.html">OpenFOAM support</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="deal.II" href="#">deal.II</a>
+        <ul>
+          
+          
+          
+          <li><a title="Overview" href="adapter-dealii-overview.html">Overview</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Get the adapter" href="adapter-dealii-get.html">Get the adapter</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Configuration" href="adapter-dealii-configure.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          <li><a title="For your own deal.II code" href="adapter-dealii-own-project.html">For your own deal.II code</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Limitations and assumptions" href="adapter-dealii-limitations.html">Limitations and assumptions</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Solver details" href="adapter-dealii-solver-details.html">Solver details</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Coupling Meshes in deal.II" href="adapter-dealii-coupling-meshes.html">Coupling Meshes in deal.II</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="CalculiX" href="#">CalculiX</a>
+        <ul>
+          
+          
+          
+          <li><a title="Overview" href="adapter-calculix-overview.html">Overview</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Get CalculiX" href="adapter-calculix-get-calculix.html">Get CalculiX</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Get the adapter" href="adapter-calculix-get-adapter.html">Get the adapter</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Build the adapter with PaStiX" href="adapter-calculix-pastix-build.html">Build the adapter with PaStiX</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Configuration" href="adapter-calculix-config.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Troubleshooting" href="adapter-calculix-troubleshooting.html">Troubleshooting</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Building on SuperMUC" href="adapter-calculix-supermuc.html">Building on SuperMUC</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="SU2" href="#">SU2</a>
+        <ul>
+          
+          
+          
+          <li><a title="Overview" href="adapter-su2-overview.html">Overview</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Get the adapter" href="adapter-su2-get.html">Get the adapter</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Configuration" href="adapter-su2-configure.html">Configuration</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      
+      
+      
+      <li><a title="FEniCS" href="adapter-fenics.html">FEniCS</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="code_aster" href="adapter-code_aster.html">code_aster</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Nutils" href="adapter-nutils.html">Nutils</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Couple your code" href="#">Couple your code</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="couple-your-code-overview.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Application programming interface" href="couple-your-code-api.html">Application programming interface</a></li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Step by step" href="#">Step by step</a>
+        <ul>
+          
+          
+          
+          <li><a title="Step 1 – Preparation" href="couple-your-code-preparing-your-solver.html">Step 1 – Preparation</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 2 – Steering methods" href="couple-your-code-steering-methods.html">Step 2 – Steering methods</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 3 – Mesh and data access" href="couple-your-code-mesh-and-data-access.html">Step 3 – Mesh and data access</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 4 – Coupling flow" href="couple-your-code-coupling-flow.html">Step 4 – Coupling flow</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 5 – Non-matching time step sizes" href="couple-your-code-time-step-sizes.html">Step 5 – Non-matching time step sizes</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 6 – Implicit coupling" href="couple-your-code-implicit-coupling.html">Step 6 – Implicit coupling</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 7 – Data initialization" href="couple-your-code-initializing-coupling-data.html">Step 7 – Data initialization</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 8 – Mesh connectivity" href="couple-your-code-defining-mesh-connectivity.html">Step 8 – Mesh connectivity</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Step 9 – Gradient Data" href="couple-your-code-gradient-data.html">Step 9 – Gradient Data</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Advanced topics" href="#">Advanced topics</a>
+        <ul>
+          
+          
+          
+          <li><a title="Adapter software engineering" href="couple-your-code-adapter-software-engineering.html">Adapter software engineering</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Initialization in existing MPI environment" href="couple-your-code-existing-mpi-environment.html">Initialization in existing MPI environment</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Dealing with moving meshes" href="couple-your-code-moving-meshes.html">Dealing with moving meshes</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Dealing with FEM meshes" href="couple-your-code-fem-meshes.html">Dealing with FEM meshes</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Dealing with distributed meshes" href="couple-your-code-distributed-meshes.html">Dealing with distributed meshes</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Direct access to received meshes" href="couple-your-code-direct-access.html">Direct access to received meshes</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Time interpolation of coupling data" href="couple-your-code-waveform.html">Time interpolation of coupling data</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Global data" href="couple-your-code-global-data.html">Global data</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      <li class="subfolders">
+        <a title="Porting guides for major versions" href="#">Porting guides for major versions</a>
+        <ul>
+          
+          
+          
+          <li><a title="Porting adapters in general" href="couple-your-code-porting-overview.html">Porting adapters in general</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Porting from 1.x to 2.x" href="couple-your-code-porting-v1-2.html">Porting from 1.x to 2.x</a></li>
+          
+          
+          
+          
+          
+          <li><a title="Porting from 2.x to 3.x" href="couple-your-code-porting-v2-3.html">Porting from 2.x to 3.x</a></li>
+          
+          
+          
+        </ul>
+      </li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Running simulations" href="#">Running simulations</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="running-overview.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Running locally" href="running-simple.html">Running locally</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Distributed systems" href="running-distributed.html">Distributed systems</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="SLURM sessions" href="running-slurm.html">SLURM sessions</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Output files" href="running-output-files.html">Output files</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Dev docs" href="#">Dev docs</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="dev-docs-overview.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Source documentation" href="dev-docs-sourcedocs.html">Source documentation</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="General coding conventions" href="dev-docs-dev-conventions.html">General coding conventions</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Timings in preCICE" href="dev-docs-dev-eventtimings.html">Timings in preCICE</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Logging" href="dev-docs-dev-logging.html">Logging</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Optimization" href="dev-docs-dev-optimization.html">Optimization</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Release workflow" href="dev-docs-dev-release.html">Release workflow</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Running and writing tests" href="dev-docs-dev-testing.html">Running and writing tests</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Tooling" href="dev-docs-dev-tooling.html">Tooling</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Release strategy" href="dev-docs-release-strategy.html">Release strategy</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Publication strategy" href="dev-docs-publication-strategy.html">Publication strategy</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  
+  <!-- Parent menu item has folderitems -->
+  <li>
+    <a title="Documentation meta" href="#">Documentation meta</a>
+    <ul>
+      
+      
+      
+      <li><a title="Overview" href="docs-meta-overview.html">Overview</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Migration guide" href="docs-meta-migration-guide.html">Migration guide</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Cheatsheet" href="docs-meta-cheatsheet.html">Cheatsheet</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Landing page" href="docs-meta-landing-page.html">Landing page</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="PDF generation" href="docs-meta-publish-to-pdf.html">PDF generation</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Common issues" href="docs-meta-common-issues.html">Common issues</a></li>
+      
+      
+      
+      
+      
+      
+      <li><a title="Search" href="docs-meta-search.html">Search</a></li>
+      
+      
+      
+      
+    </ul>
+  </li>
+  
+  
+  
+  
+  <!-- if you aren't using the accordion, uncomment this block:
+  <p class="external">
+  <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+  </p>
+  -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                    </div>
+                    
+                    
+
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Performance analysis</h1>
+</div>
+
+
+
+<div class="post-content">
+
+    
+    <div class="summary">
+        <!-- https://github.com/jekyll/jekyll/issues/3571 -->
+        preCICE comes with an internal performance analysis framework
+
+    </div>
+    
+
+    <div class="row">
+        <div class="col-md-10 col-sm-8">
+          
+          
+          
+<!-- this handles the automatic toc. use ## for subheads to auto-generate the on-page minitoc. if you use html tags, you must supply an ID for the heading element in order for it to appear in the minitoc. -->
+<script>
+$( document ).ready(function() {
+  // Handler for .ready() called.
+
+    $('#toc').toc({ minimumHeaders: 0, listType: 'ul', showSpeed: 0, headers:  'h2,h3,h4'  });
+
+/* this offset helps account for the space taken up by the floating toolbar. */
+$('#toc').on('click', 'a', function() {
+  var target = $(this.getAttribute('href'))
+    , scroll_target = target.offset().top
+
+  $(window).scrollTop(scroll_target - 10);
+  return false
+})
+  
+});
+</script>
+
+<div id="toc"></div>
+
+          
+          
+        </div>
+
+        <div class="col-md-2 col-sm-4">
+            
+            
+                <div class="text-right">
+                    <a target="_blank" rel="noopener" href="https://github.com/precice/precice.github.io_future/edit/master/pages/docs/tooling/tooling-performance-analysis.md" class="btn btn-default githubEditButton" role="button"><i class="fab fa-github fa-lg"></i> Edit me</a>
+                </div>
+            
+            
+        </div>
+    </div>
+
+   <h2 id="introduction">Introduction</h2>
+
+<p>preCICE uses an internal profiling framework to measure code sections inside and between API calls of the library.
+Existing external frameworks cannot cope with the complexity of the multi-executable setup of preCICE.
+To understand the performance of a coupled run, it is necessary to look at the interplay of all coupled participants.</p>
+
+<p>These named code sections are called <code class="language-plaintext highlighter-rouge">events</code> and each event generates records during runtime.
+Each rank of each participant gathers local records and writes them to a JSON file. To store these JSON files, preCICE creates a directory called <code class="language-plaintext highlighter-rouge">precice-profiling</code> in the current working directory of each participant.
+All these files of all participants then need to be post-processed and merged to a single file using the <code class="language-plaintext highlighter-rouge">merge</code> command of the <code class="language-plaintext highlighter-rouge">precice-profiling</code> python script.
+You can then use other commands of the <code class="language-plaintext highlighter-rouge">precice-profiling</code> script to analyze and export the profiling data.
+The script is installed in the binary directory and can also be found in the source repo in the folder <code class="language-plaintext highlighter-rouge">tooling/profiling/</code>.</p>
+
+<h2 id="fundamental-events">Fundamental Events</h2>
+
+<p>Some events are useful for everyone, while others are only useful for developers.
+To keep this feature as useful as possible, we pre-selected a set of events that we deem fundamental.
+These include the main preCICE API functions and the time spent between these calls inside the solvers.
+Fundamental events should give you an insight in the overhead of preCICE as well as load imbalance between ranks etc.</p>
+
+<p>Fundamental events are:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">_GLOBAL</code> time spent from the initialization of the events framework to the finalization. Starts in the construction of the participant and ends in finalize or the destructor.</li>
+  <li><code class="language-plaintext highlighter-rouge">construction</code> time spent in construction of the Participant, including configuration and setting up the intra-communication of each participant.</li>
+  <li><code class="language-plaintext highlighter-rouge">solver.initialize</code> time spent in the solver until <code class="language-plaintext highlighter-rouge">initialize()</code> is called. This normally includes setting meshes, defining initial data and preparing the solver.</li>
+  <li><code class="language-plaintext highlighter-rouge">initialize()</code> time spent in preCICE <code class="language-plaintext highlighter-rouge">initialize()</code>. This includes establishing communication between participants, mesh and data transfer, as well as mapping computation.</li>
+  <li><code class="language-plaintext highlighter-rouge">solver.advance</code> time spent in the solver between <code class="language-plaintext highlighter-rouge">advance()</code> calls, including the time between <code class="language-plaintext highlighter-rouge">initialize()</code> and the first <code class="language-plaintext highlighter-rouge">advance()</code> call.</li>
+  <li><code class="language-plaintext highlighter-rouge">advance()</code> time spent in preCICE <code class="language-plaintext highlighter-rouge">advance()</code>. This includes data mapping, data transfer, acceleration.</li>
+</ul>
+
+<h2 id="measuring-blocking-operations">Measuring Blocking Operations</h2>
+
+<p>Some parts of preCICE involve communication, which cannot be interleaved efficiently with other computations.
+Measuring the runtime of such operations can be tricky, as the time spent waiting should not be misinterpreted.
+Synchronizing all ranks using a barrier solves the issue, but has an impact on performance.</p>
+
+<p>To keep this waiting component of the overall measurement to a minimum without affecting performance, we added a configuration option to toggle the synchonization before required events.
+Use the <code class="language-plaintext highlighter-rouge">synchronize</code> attribute to enable such synchronization if you need it.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;precice-configuration&gt;</span>
+    <span class="nt">&lt;profiling</span> <span class="na">synchronize=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/precice-configuration&gt;</span>
+</code></pre></div></div>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>You can configure the profiling with the <code class="language-plaintext highlighter-rouge">&lt;profiling/&gt;</code> tag located inside <code class="language-plaintext highlighter-rouge">&lt;precice-configuration&gt;</code>.
+The default settings enable profiling of fundamental events and write the event files the working directory of each solver.</p>
+
+<p>The full configuration consists of:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">mode</code> either <code class="language-plaintext highlighter-rouge">off</code>, <code class="language-plaintext highlighter-rouge">fundamental</code> (default), or <code class="language-plaintext highlighter-rouge">all</code></li>
+  <li><code class="language-plaintext highlighter-rouge">directory</code> location to create the <code class="language-plaintext highlighter-rouge">precice-profiling</code> folder in and write the profiling files to</li>
+  <li>the flush frequency  <code class="language-plaintext highlighter-rouge">flush-every</code>: <code class="language-plaintext highlighter-rouge">0</code> means only at the end of the simulation, <code class="language-plaintext highlighter-rouge">n&gt;0</code> means to flush every n records</li>
+</ul>
+
+<h3 id="examples">Examples</h3>
+
+<p>To turn the profiling off:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;precice-configuration&gt;</span>
+  <span class="nt">&lt;profiling</span> <span class="na">mode=</span><span class="s">"off"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/precice-configuration&gt;</span>
+</code></pre></div></div>
+
+<p>To write the files of all participants into a common directory (often <code class="language-plaintext highlighter-rouge">..</code> works too):</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;precice-configuration&gt;</span>
+  <span class="nt">&lt;profiling</span> <span class="na">directory=</span><span class="s">"/path/to/dir"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/precice-configuration&gt;</span>
+</code></pre></div></div>
+
+<p>To prevent any write operations of the filesystem until the end of the simulation:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;precice-configuration&gt;</span>
+  <span class="nt">&lt;profiling</span> <span class="na">flush-every=</span><span class="s">"0"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/precice-configuration&gt;</span>
+</code></pre></div></div>
+
+<p>To profile blocking operations:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;precice-configuration&gt;</span>
+  <span class="nt">&lt;profiling</span> <span class="na">mode=</span><span class="s">"all"</span> <span class="na">synchronize=</span><span class="s">"true"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/precice-configuration&gt;</span>
+</code></pre></div></div>
+
+<h2 id="post-processing-workflow">Post-processing workflow</h2>
+
+<p>The general workflow looks as follows:</p>
+
+<ol>
+  <li>Run the simulation</li>
+  <li>Merge the event files</li>
+  <li>Analyze each participant executing a mapping or computing acceleration</li>
+  <li>Analyze each participant to check for load-imbalance between ranks</li>
+  <li>Visualize the simulation to check for load-imbalance between participants</li>
+</ol>
+
+<p>The rest of the section will go through the process of analyzing participants step by step.</p>
+
+<h3 id="merging-event-files">Merging Event Files</h3>
+
+<p>After the simulation completes, you can find <code class="language-plaintext highlighter-rouge">precice-profiling</code> folders in the configured location, defaulting to the working directory of each participant.
+An example could look like this:</p>
+
+<pre><code class="language-txt">.
+├── A
+│   └── precice-profiling
+│       └── A-0-1.json
+├── B
+│   └── precice-profiling
+│       └── B-0-1.json
+└── precice-config.xml
+</code></pre>
+
+<p>where the naming pattern is <code class="language-plaintext highlighter-rouge">participant-rank-file_number</code>. To find and merge these files run:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span>
+<span class="go">A
+B
+</span><span class="gp">$</span><span class="w"> </span>precice-profiling merge A B
+<span class="go">Searching A : found 1 files in A/precice-profiling
+Searching B : found 1 files in B/precice-profiling
+Found 2 unique event files
+Found a single run for participant B
+Found a single run for participant A
+Loading event files
+Globalizing event names
+Grouping events
+Aligning B (-179us) with A
+Writing to profiling.json
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">ls</span>
+<span class="go">A
+B
+profiling.json
+</span></code></pre></div></div>
+
+<p>The merge command searches passed directories for the event files.
+You can also pass individual files if you are not interested in all ranks.</p>
+
+<p>The merge command is written in pure Python, without external dependencies, to make it easy to use on clusters.
+After you run <code class="language-plaintext highlighter-rouge">precice-profiling merge</code>, you end up with a single file, which can be additionally compressed and transferred to another machine.
+This is especially handy for very large and/or long simulations on clusters or supercomputers.</p>
+
+<p>The result of this step is a single <code class="language-plaintext highlighter-rouge">profiling.json</code> file.</p>
+
+<h3 id="visualizing-the-simulation">Visualizing the simulation</h3>
+
+<p>You can run <code class="language-plaintext highlighter-rouge">precice-profiling trace</code> to export the <code class="language-plaintext highlighter-rouge">profiling.json</code> file as <code class="language-plaintext highlighter-rouge">trace.json</code> in the <a href="https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU/preview">trace events format</a>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>precice-profiling trace
+<span class="go">Reading profiling file profiling.json
+Writing to trace.json
+</span></code></pre></div></div>
+
+<p>This trace format can then be visualized using the following tools:</p>
+
+<ul>
+  <li><a href="https://ui.perfetto.dev">ui.perfetto.dev</a></li>
+  <li><a href="https://profiler.firefox.com/">profiler.firefox.com</a></li>
+  <li><a href="https://www.speedscope.app/">speedscope.app</a></li>
+  <li><a href="chrome://tracing/"><code class="language-plaintext highlighter-rouge">chrome://tracing/</code></a> in Chromium browsers <a href="https://en.wikipedia.org/wiki/Chromium_(web_browser)#Active"><em>(see full list)</em></a></li>
+</ul>
+
+<p>These visualization tools cannot handle large runs though.
+There are two options to reduce the trace size:
+You can select the first <code class="language-plaintext highlighter-rouge">N</code> ranks using <code class="language-plaintext highlighter-rouge">-l N</code> and you can pick specific ranks using <code class="language-plaintext highlighter-rouge">-r RANK ...</code>
+These two selectors are combined.</p>
+
+<p>As an example, to select the first 3 ranks and in addition ranks 10 and 200:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>precice-profiling trace <span class="nt">-l</span> 3 <span class="nt">-r</span> 10 200
+<span class="go">Reading profiling file profiling.json
+Selected ranks: 0,1,2,10,200
+Writing to trace.json
+</span></code></pre></div></div>
+
+<p>An example trace visualization using <code class="language-plaintext highlighter-rouge">ui.perfetto.dev</code> of the <a href="tutorials-elastic-tube-1d.html">elastic tube 1d tutorial</a> looks as follows.
+Note the alternating executions of the solver due to the serial coupling scheme.</p>
+
+<p><img src="images/docs/tooling/profiling-elastictube1d-serial.png" alt="example of the elastic tube 1d tutorial visualized by perfetto" /></p>
+
+<p>An example trace visualization using <code class="language-plaintext highlighter-rouge">ui.perfetto.dev</code> of a parallel <a href="tooling-aste.html">ASTE</a> run on two and four ranks looks as follows.
+This first version contains only fundamental events, which is the default profiling setting.</p>
+
+<p><img src="images/docs/tooling/profiling-aste-perfetto-parallel-fundamental.png" alt="example of parallel ASTE with fundamental events only visualized by perfetto" /></p>
+
+<p>This second version contains all events using the configuration <code class="language-plaintext highlighter-rouge">&lt;profiling mode="all" /&gt;</code>.</p>
+
+<p><img src="images/docs/tooling/profiling-aste-perfetto-parallel-all.png" alt="example of parallel ASTE with all events visualized by perfetto" /></p>
+
+<h3 id="analyzing-participants">Analyzing participants</h3>
+
+<p>You can run <code class="language-plaintext highlighter-rouge">precice-profiling analyze NAME</code> to analyze the participant <code class="language-plaintext highlighter-rouge">NAME</code> and display a table of recorded events.
+The output differs for serial and parallel participants.</p>
+
+<p>The output for serial solvers contains a table displaying the name of the event, followed by the sum, count, mean, min, and max runtime.</p>
+
+<div style="display:contents;overflow-x:auto">
+
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>precice-profiling analyze Fluid
+<span class="go">Reading profiling file profiling.json
+Output timing are in us.
+                                            event |        sum    count               mean        min        max
+                                          _GLOBAL | 34125973.0        1         34125973.0 34125973.0 34125973.0
+                                          advance | 32893268.0      793 41479.530895334174      116.0    45942.0
+                                     construction |    59470.0        1            59470.0    59470.0    59470.0
+                           construction/configure |    59265.0        1            59265.0    59265.0    59265.0
+                                         finalize |    42664.0        1            42664.0    42664.0    42664.0
+                                       initialize |   181787.0        1           181787.0   181787.0   181787.0
+initialize/m2n.requestPrimaryRankConnection.Solid |      266.0        1              266.0      266.0      266.0
+                                   solver.advance |   947727.0      794  1193.610831234257      550.0    15470.0
+                                solver.initialize |       29.0        1               29.0       29.0       29.0
+</span></code></pre></div>  </div>
+
+</div>
+
+<p>The output for parallel solvers is slightly more complex.
+After the name of the event, the table contains three blocks, each containing the sum, count, mean, min, and max runtime for a specific rank.</p>
+
+<ol>
+  <li>The first block displays the primary rank (0).</li>
+  <li>The second block displays the secondary rank which spent the least total time in the event given via <code class="language-plaintext highlighter-rouge">--event EVENT</code>. By default, <code class="language-plaintext highlighter-rouge">--event advance</code> is used.</li>
+  <li>The third block displays the secondary rank which spent the most total time in the event given via <code class="language-plaintext highlighter-rouge">--event EVENT</code>. By default, <code class="language-plaintext highlighter-rouge">--event advance</code> is used.</li>
+</ol>
+
+<div style="display:block;overflow-x:auto">
+
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>precice-profiling analyze <span class="nt">--event</span> advance B
+<span class="go">Reading profiling file profiling.json
+Output timing are in us.
+Selection contains the primary rank 0, the cheapest secondary rank 2, and the most expensive secondary rank 1.
+                                       event |   R0:sum R0:count  R0:mean   R0:min   R0:max |   R2:sum R2:count  R2:mean   R2:min   R2:max |   R1:sum R1:count  R1:mean   R1:min   R1:max
+                                     _GLOBAL |  66888.0        1  66888.0  66888.0  66888.0 |  66953.0        1  66953.0  66953.0  66953.0 |  68462.0        1  68462.0  68462.0  68462.0
+                                     advance |    170.0        1    170.0    170.0    170.0 |    154.0        1    154.0    154.0    154.0 |    905.0        1    905.0    905.0    905.0
+                                construction |   3179.0        1   3179.0   3179.0   3179.0 |   3171.0        1   3171.0   3171.0   3171.0 |   3132.0        1   3132.0   3132.0   3132.0
+         construction/com.initializeIntraCom |    130.0        1    130.0    130.0    130.0 |    157.0        1    157.0    157.0    157.0 |    153.0        1    153.0    153.0    153.0
+                      construction/configure |   2863.0        1   2863.0   2863.0   2863.0 |   2828.0        1   2828.0   2828.0   2828.0 |   2786.0        1   2786.0   2786.0   2786.0
+                                    finalize |    291.0        1    291.0    291.0    291.0 |    365.0        1    365.0    365.0    365.0 |    251.0        1    251.0    251.0    251.0
+                                  initialize |  54588.0        1  54588.0  54588.0  54588.0 |  54008.0        1  54008.0  54008.0  54008.0 |  54450.0        1  54450.0  54450.0  54450.0
+initialize/m2n.acceptPrimaryRankConnection.A |   1227.0        1   1227.0   1227.0   1227.0 |   1569.0        1   1569.0   1569.0   1569.0 |   1123.0        1   1123.0   1123.0   1123.0
+                              solver.advance |   7063.0        2   3531.5    621.0   6442.0 |   8018.0        2   4009.0    454.0   7564.0 |   8016.0        2   4008.0    635.0   7381.0
+                           solver.initialize |   1557.0        1   1557.0   1557.0   1557.0 |   1201.0        1   1201.0   1201.0   1201.0 |   1678.0        1   1678.0   1678.0   1678.0
+</span></code></pre></div>  </div>
+
+</div>
+
+<h3 id="processing-in-other-software">Processing in other software</h3>
+
+<p>You can run <code class="language-plaintext highlighter-rouge">precice-profiling export</code> to export the <code class="language-plaintext highlighter-rouge">profiling.json</code> file as <code class="language-plaintext highlighter-rouge">profiling.csv</code>.
+This contains CSV data including all individual events from all participants and ranks.
+It also contains additional data entries attached to events.
+The header of the result CSV is <code class="language-plaintext highlighter-rouge">participant,rank,size,event,timestamp,duration,data</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>precice-profiling <span class="nb">export</span>
+<span class="go">Reading profiling file profiling.json
+Writing to profiling.csv
+</span></code></pre></div></div>
+
+<p>Example of loading the csv into pandas and extracting rank 0 of participant A:</p>
+
+<div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">"profiling.csv"</span><span class="p">)</span>
+<span class="n">selection</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">"participant"</span><span class="p">]</span> <span class="o">==</span> <span class="s">"A"</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">"rank"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">]</span>
+</code></pre></div></div>
+
+
+    <div class="tags">
+        
+    </div>
+
+
+
+</div>
+
+
+                        <hr class="faded"/>
+                        <footer>
+	<div class="row text-center">
+
+		 Site last generated: Nov 20, 2023 <br />
+
+		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
+		</a>
+		<br />
+		This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+	</div>
+
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+            <!-- /.container -->
+            </div>
+        <!-- /#main -->
+        </div>
+    </main>
+</body>
+
+
+</html>

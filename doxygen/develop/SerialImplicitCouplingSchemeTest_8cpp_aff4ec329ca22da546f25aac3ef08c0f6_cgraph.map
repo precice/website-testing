@@ -1,0 +1,12 @@
+<map id="BOOST_AUTO_TEST_CASE" name="BOOST_AUTO_TEST_CASE">
+<area shape="rect" id="node1" title=" " alt="" coords="5,173,196,199"/>
+<area shape="rect" id="node2" href="$namespaceprecice_1_1xml.html#af9f808fbdf078c4e28e4f5ea71b14788" title="Configures the given configuration from file configurationFilename." alt="" coords="272,74,443,101"/>
+<area shape="rect" id="node5" href="$classprecice_1_1cplscheme_1_1CouplingSchemeConfiguration.html#a0ed3c97d33c092d6c81f0840895207f5" title="Returns the configured coupling scheme." alt="" coords="244,125,471,181"/>
+<area shape="rect" id="node7" href="$namespaceprecice_1_1xml.html#a44dd973bd070a46334fae66b7f392264" title="Returns an XMLTag::Listener that does nothing on callbacks." alt="" coords="266,205,449,231"/>
+<area shape="rect" id="node8" href="$SerialImplicitCouplingSchemeTest_8cpp.html#adb67549efa4df9651fae6e347e5e7eea" title=" " alt="" coords="307,255,407,282"/>
+<area shape="rect" id="node3" href="$classprecice_1_1xml_1_1XMLTag.html#af81dc6eea2b9a75e14ddd6033ed9a1d4" title="Adds an XML tag as subtag by making a copy of the given tag." alt="" coords="528,5,687,47"/>
+<area shape="rect" id="node4" href="$classprecice_1_1xml_1_1XMLTag.html#aa90f7a05aeab6f674ee1499a84a8bb2e" title="Returns full name consisting of xml namespace + &quot;:&quot; + name." alt="" coords="528,71,687,112"/>
+<area shape="rect" id="node6" href="$namespaceprecice_1_1utils.html#a434eabaa71f97a31726281a4df77bbcf" title="Returns true, if given element is in vector, otherwise false." alt="" coords="519,139,696,166"/>
+<area shape="rect" id="node9" href="$namespaceprecice_1_1testing.html#a0819eba8ac83ede1db16e724dd4f5458" title="equals to be used in tests. Compares two std::vectors using a given tolerance. Prints both operands o..." alt="" coords="521,226,694,253"/>
+<area shape="rect" id="node10" href="$classprecice_1_1mesh_1_1Vertex.html#a2f62d7ef09981e963638cb3f2f6a9603" title="Returns the unique (among vertices of one mesh on one processor) ID of the vertex." alt="" coords="526,277,689,319"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="precice::mapping::Mapping::map" name="precice::mapping::Mapping::map">
+<area shape="rect" id="node1" title=" " alt="" coords="5,163,240,189"/>
+<area shape="rect" id="node2" href="$namespaceprecice_1_1detail.html#adede399b4b92eea01face616a0cc7051" title=" " alt="" coords="312,5,463,32"/>
+<area shape="rect" id="node3" href="$classprecice_1_1mapping_1_1Mapping.html#a393912fe4919edd098e96f66ffbe0d52" title=" " alt="" coords="288,57,487,98"/>
+<area shape="rect" id="node4" href="$classprecice_1_1mapping_1_1Mapping.html#a61c3c55af467ada2bdd735efa0f960e4" title="Returns pointer to input mesh." alt="" coords="288,122,487,163"/>
+<area shape="rect" id="node5" href="$classprecice_1_1mapping_1_1Mapping.html#a07a71a54b71eda6d54510c94fb188e70" title="Returns pointer to output mesh." alt="" coords="288,187,487,229"/>
+<area shape="rect" id="node6" href="$classprecice_1_1mapping_1_1Mapping.html#a06a1bad07e3562ca32581e412769b2e9" title="Return true if the mapping requires an initial guess." alt="" coords="288,253,487,294"/>
+<area shape="rect" id="node7" href="$namespaceprecice_1_1detail.html#a99f20f73c4a3c34d08429ac0fea564ef" title=" " alt="" coords="313,319,461,345"/>
+</map>
