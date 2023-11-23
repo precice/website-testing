@@ -2,7 +2,7 @@ var searchData=
 [
   ['l2norm_1722',['l2norm',['../classprecice_1_1utils_1_1IntraComm.html#a2b6ac8a54b0f96edb2e3fe47d3a52d62',1,'precice::utils::IntraComm::l2norm()'],['../classprecice_1_1utils_1_1petsc_1_1Vector.html#a2d711b1644b223d934cbfff319eb4da4',1,'precice::utils::petsc::Vector::l2norm()']]],
   ['la_2ehpp_1723',['la.hpp',['../la_8hpp.html',1,'']]],
-  ['last_1724',['last',['../classprecice_1_1span.html#a85c6909b2c5610d58cfa37ddf465c752',1,'precice::span::last() const'],['../classprecice_1_1span.html#a850cd1f56b84a28a30b35e9a67da0dc1',1,'precice::span::last(size_type count) const']]],
+  ['last_1724',['last',['../classprecice_1_1span.html#a85c6909b2c5610d58cfa37ddf465c752',1,'precice::span::last() const'],['../classprecice_1_1span.html#a850cd1f56b84a28a30b35e9a67da0dc1',1,'precice::span::last(size_type count) const'],['../classprecice_1_1time_1_1Storage.html#aecf86758ba1ce3769371b3b5325ff402',1,'precice::time::Storage::last()']]],
   ['leaderrank_1725',['leaderRank',['../structprecice_1_1utils_1_1Parallel_1_1AccessorGroup.html#a1d25a7b5fc46690d4b78108507ca8414',1,'precice::utils::Parallel::AccessorGroup']]],
   ['left_1726',['LEFT',['../classprecice_1_1utils_1_1petsc_1_1Vector.html#a040a9d7d0c7b08f6ee5b614a4782b18ea10aa0bd747407456bf2f134db4e13bda',1,'precice::utils::petsc::Vector']]],
   ['leftright_1727',['LEFTRIGHT',['../classprecice_1_1utils_1_1petsc_1_1Vector.html#a040a9d7d0c7b08f6ee5b614a4782b18e',1,'precice::utils::petsc::Vector']]],
