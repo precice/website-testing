@@ -251,12 +251,13 @@ var searchData=
   ['svdfactorization_2824',['SVDFactorization',['../classprecice_1_1acceleration_1_1impl_1_1SVDFactorization.html',1,'precice::acceleration::impl::SVDFactorization'],['../classprecice_1_1acceleration_1_1impl_1_1SVDFactorization.html#ad26665d2b188a3e8022091e5b24a8244',1,'precice::acceleration::impl::SVDFactorization::SVDFactorization()']]],
   ['svdfactorization_2ecpp_2825',['SVDFactorization.cpp',['../SVDFactorization_8cpp.html',1,'']]],
   ['svdfactorization_2ehpp_2826',['SVDFactorization.hpp',['../SVDFactorization_8hpp.html',1,'']]],
-  ['swap_2827',['swap',['../classprecice_1_1logging_1_1Logger.html#a8b561ea14e411809925ef1810296baf1',1,'precice::logging::Logger::swap()'],['../classprecice_1_1utils_1_1petsc_1_1Vector.html#ae84165949b44ffd85dd728903780b3d5',1,'precice::utils::petsc::Vector::swap()'],['../namespaceprecice_1_1utils_1_1petsc.html#af4f3b4ed0340a1790eefec6187535621',1,'precice::utils::petsc::swap()']]],
-  ['synchronize_2828',['synchronize',['../classprecice_1_1utils_1_1IntraComm.html#ab83f497a05f344c66737c0eb98f7a7b5',1,'precice::utils::IntraComm::synchronize()'],['../structprecice_1_1utils_1_1Parallel_1_1CommState.html#a88427c8d493ce08ba05c29464e70064a',1,'precice::utils::Parallel::CommState::synchronize()'],['../namespaceprecice_1_1profiling.html#ab44f44c540c9209ff4b5657b2ac50084',1,'precice::profiling::Synchronize()']]],
-  ['synchronized_2829',['synchronized',['../structprecice_1_1profiling_1_1Event_1_1Options.html#a5e7ae9361d606422917d1215c6431901',1,'precice::profiling::Event::Options']]],
-  ['synchronizetag_2830',['SynchronizeTag',['../structprecice_1_1profiling_1_1SynchronizeTag.html',1,'precice::profiling']]],
-  ['syncmode_2831',['syncMode',['../namespaceprecice.html#af702febbc9b271b27825da88dc83a008',1,'precice']]],
-  ['synctimestep_2832',['syncTimestep',['../classprecice_1_1impl_1_1ParticipantImpl.html#ad24d152465417f618bc853ce3746944d',1,'precice::impl::ParticipantImpl']]],
-  ['sys_5fclk_2833',['sys_clk',['../namespaceprecice_1_1profiling.html#a341721427abc355f2337a7fc6f4b5ca0',1,'precice::profiling']]],
-  ['systemsolver_2834',['SystemSolver',['../structprecice_1_1mapping_1_1MappingConfiguration_1_1RBFConfiguration.html#ae10e422be8a24126a1115a1b4d9a7a83',1,'precice::mapping::MappingConfiguration::RBFConfiguration']]]
+  ['svdfactorizationtest_2ecpp_2827',['SVDFactorizationTest.cpp',['../SVDFactorizationTest_8cpp.html',1,'']]],
+  ['swap_2828',['swap',['../classprecice_1_1logging_1_1Logger.html#a8b561ea14e411809925ef1810296baf1',1,'precice::logging::Logger::swap()'],['../classprecice_1_1utils_1_1petsc_1_1Vector.html#ae84165949b44ffd85dd728903780b3d5',1,'precice::utils::petsc::Vector::swap()'],['../namespaceprecice_1_1utils_1_1petsc.html#af4f3b4ed0340a1790eefec6187535621',1,'precice::utils::petsc::swap()']]],
+  ['synchronize_2829',['synchronize',['../classprecice_1_1utils_1_1IntraComm.html#ab83f497a05f344c66737c0eb98f7a7b5',1,'precice::utils::IntraComm::synchronize()'],['../structprecice_1_1utils_1_1Parallel_1_1CommState.html#a88427c8d493ce08ba05c29464e70064a',1,'precice::utils::Parallel::CommState::synchronize()'],['../namespaceprecice_1_1profiling.html#ab44f44c540c9209ff4b5657b2ac50084',1,'precice::profiling::Synchronize()']]],
+  ['synchronized_2830',['synchronized',['../structprecice_1_1profiling_1_1Event_1_1Options.html#a5e7ae9361d606422917d1215c6431901',1,'precice::profiling::Event::Options']]],
+  ['synchronizetag_2831',['SynchronizeTag',['../structprecice_1_1profiling_1_1SynchronizeTag.html',1,'precice::profiling']]],
+  ['syncmode_2832',['syncMode',['../namespaceprecice.html#af702febbc9b271b27825da88dc83a008',1,'precice']]],
+  ['synctimestep_2833',['syncTimestep',['../classprecice_1_1impl_1_1ParticipantImpl.html#ad24d152465417f618bc853ce3746944d',1,'precice::impl::ParticipantImpl']]],
+  ['sys_5fclk_2834',['sys_clk',['../namespaceprecice_1_1profiling.html#a341721427abc355f2337a7fc6f4b5ca0',1,'precice::profiling']]],
+  ['systemsolver_2835',['SystemSolver',['../structprecice_1_1mapping_1_1MappingConfiguration_1_1RBFConfiguration.html#ae10e422be8a24126a1115a1b4d9a7a83',1,'precice::mapping::MappingConfiguration::RBFConfiguration']]]
 ];
