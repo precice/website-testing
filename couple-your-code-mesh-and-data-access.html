@@ -1577,18 +1577,15 @@ $('#toc').on('click', 'a', function() {
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 
 <span class="nt">&lt;precice-configuration&gt;</span>
-
-  <span class="nt">&lt;solver-interface</span> <span class="na">dimensions=</span><span class="s">"3"</span><span class="nt">&gt;</span>
-
     <span class="nt">&lt;data:vector</span> <span class="na">name=</span><span class="s">"Forces"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;data:vector</span> <span class="na">name=</span><span class="s">"Displacements"</span><span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"FluidMesh"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"FluidMesh"</span> <span class="na">dimensions=</span><span class="s">"3"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Forces"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Displacements"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/mesh&gt;</span>
 
-    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"StructureMesh"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"StructureMesh"</span> <span class="na">dimensions=</span><span class="s">"3"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Forces"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Displacements"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/mesh&gt;</span>
@@ -1619,9 +1616,6 @@ $('#toc').on('click', 'a', function() {
       <span class="nt">&lt;exchange</span> <span class="na">data=</span><span class="s">"Forces"</span> <span class="na">mesh=</span><span class="s">"StructureMesh"</span> <span class="na">from=</span><span class="s">"FluidSolver"</span> <span class="na">to=</span><span class="s">"SolidSolver"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;exchange</span> <span class="na">data=</span><span class="s">"Displacements"</span> <span class="na">mesh=</span><span class="s">"StructureMesh"</span> <span class="na">from=</span><span class="s">"SolidSolver"</span> <span class="na">to=</span><span class="s">"FluidSolver"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/coupling-scheme:serial-explicit&gt;</span>
-
-  <span class="nt">&lt;/solver-interface&gt;</span>
-
 <span class="nt">&lt;/precice-configuration&gt;</span>
 </code></pre></div></div>
 
@@ -1639,7 +1633,7 @@ $('#toc').on('click', 'a', function() {
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Dec 1, 2023 <br />
+		 Site last generated: Dec 3, 2023 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />

@@ -1569,20 +1569,17 @@ For preCICE versions lower than 2.5.0, you need to set the flag <code class="lan
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 
-<span class="nt">&lt;precice-configuration&gt;</span>
-
-  <span class="nt">&lt;solver-interface</span> <span class="na">dimensions=</span><span class="s">"3"</span> <span class="na">experimental=</span><span class="s">"on"</span><span class="nt">&gt;</span>
-
+<span class="nt">&lt;precice-configuration</span> <span class="na">experimental=</span><span class="s">"true"</span><span class="nt">&gt;</span>
     <span class="c">&lt;!-- the gradient flag here is only required vor preCICE version 2.4.0 --&gt;</span>
     <span class="nt">&lt;data:vector</span> <span class="na">name=</span><span class="s">"Stress"</span> <span class="na">gradient=</span><span class="s">"on"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;data:vector</span> <span class="na">name=</span><span class="s">"Displacements"</span> <span class="nt">/&gt;</span>
 
-    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"FluidMesh"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"FluidMesh"</span> <span class="na">dimensions=</span><span class="s">"3"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Stress"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Displacements"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/mesh&gt;</span>
 
-    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"StructureMesh"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;mesh</span> <span class="na">name=</span><span class="s">"StructureMesh"</span> <span class="na">dimensions=</span><span class="s">"3"</span><span class="nt">&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Stress"</span><span class="nt">/&gt;</span>
       <span class="nt">&lt;use-data</span> <span class="na">name=</span><span class="s">"Displacements"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/mesh&gt;</span>
@@ -1598,7 +1595,6 @@ For preCICE versions lower than 2.5.0, you need to set the flag <code class="lan
                                 <span class="na">to=</span><span class="s">"FluidMesh"</span> <span class="na">constraint=</span><span class="s">"consistent"</span><span class="nt">/&gt;</span>
     <span class="nt">&lt;/participant&gt;</span>
     [...]
-  <span class="nt">&lt;/solver-interface&gt;</span>
 <span class="nt">&lt;/precice-configuration&gt;</span>
 </code></pre></div></div>
 
@@ -1616,7 +1612,7 @@ For preCICE versions lower than 2.5.0, you need to set the flag <code class="lan
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Dec 1, 2023 <br />
+		 Site last generated: Dec 3, 2023 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
