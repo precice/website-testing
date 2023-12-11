@@ -1502,7 +1502,7 @@ $('#toc').on('click', 'a', function() {
 <h2 id="basics-and-pre-implemented-actions">Basics and pre-implemented actions</h2>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;participant</span> <span class="na">name=</span><span class="s">"MySolver1"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;use-mesh</span> <span class="na">name=</span><span class="s">"MyMesh1"</span> <span class="na">provide=</span><span class="s">"yes"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;provide-mesh</span> <span class="na">name=</span><span class="s">"MyMesh1"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;write-data</span> <span class="na">name=</span><span class="s">"Stresses"</span> <span class="na">mesh=</span><span class="s">"MyMesh1"</span><span class="nt">/&gt;</span>
     ...
     <span class="nt">&lt;action:multiply-by-area</span> <span class="na">mesh=</span><span class="s">"MyMesh1"</span> <span class="na">timing=</span><span class="s">"write-mapping-post"</span><span class="nt">&gt;</span>
@@ -1549,8 +1549,8 @@ The primary purpose of the python interface is prototyping. If you need a native
 <p>We show an example for the <a href="tutorials-elastic-tube-1d.html">1D elastic tube</a>:</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;participant</span> <span class="na">name=</span><span class="s">"Solid"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;use-mesh</span> <span class="na">name=</span><span class="s">"Solid-Nodes-Mesh"</span> <span class="na">provide=</span><span class="s">"yes"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;use-mesh</span> <span class="na">name=</span><span class="s">"Fluid-Nodes-Mesh"</span> <span class="err">from</span> <span class="err">"Fluid"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;provide-mesh</span> <span class="na">name=</span><span class="s">"Solid-Nodes-Mesh"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;receive-mesh</span> <span class="na">name=</span><span class="s">"Fluid-Nodes-Mesh"</span> <span class="err">from</span> <span class="err">"Fluid"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;write-data</span> <span class="na">name=</span><span class="s">"CrossSectionLength"</span> <span class="na">mesh=</span><span class="s">"Solid-Nodes-Mesh"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;read-data</span> <span class="na">name=</span><span class="s">"Pressure"</span> <span class="na">mesh=</span><span class="s">"Solid-Nodes-Mesh"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;action:python</span> <span class="na">mesh=</span><span class="s">"Solid-Nodes-Mesh"</span> <span class="na">timing=</span><span class="s">"read-mapping-post"</span><span class="nt">&gt;</span>
@@ -1608,7 +1608,7 @@ The primary purpose of the python interface is prototyping. If you need a native
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Dec 3, 2023 <br />
+		 Site last generated: Dec 11, 2023 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
