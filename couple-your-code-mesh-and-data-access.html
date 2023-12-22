@@ -1541,7 +1541,6 @@ $('#toc').on('click', 'a', function() {
 <span class="c1">// determine coordinates</span>
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">vertexIDs</span><span class="p">(</span><span class="n">vertexSize</span><span class="p">);</span>
 <span class="n">precice</span><span class="p">.</span><span class="n">setMeshVertices</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">);</span>
-<span class="k">delete</span><span class="p">[]</span> <span class="n">coords</span><span class="p">;</span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">forces</span><span class="p">(</span><span class="n">vertexSize</span><span class="o">*</span><span class="n">dim</span><span class="p">);</span>
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">displacements</span><span class="p">(</span><span class="n">vertexSize</span><span class="o">*</span><span class="n">dim</span><span class="p">);</span>
@@ -1564,7 +1563,6 @@ $('#toc').on('click', 'a', function() {
   <span class="n">endTimeStep</span><span class="p">();</span> <span class="c1">// e.g. update variables, increment time</span>
 <span class="p">}</span>
 <span class="n">precice</span><span class="p">.</span><span class="n">finalize</span><span class="p">();</span> <span class="c1">// frees data structures and closes communication channels</span>
-<span class="k">delete</span><span class="p">[]</span> <span class="n">vertexIDs</span><span class="p">,</span> <span class="n">forces</span><span class="p">,</span> <span class="n">displacements</span><span class="p">;</span>
 <span class="n">turnOffSolver</span><span class="p">();</span>
 </code></pre></div></div>
 
@@ -1633,7 +1631,7 @@ $('#toc').on('click', 'a', function() {
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Dec 15, 2023 <br />
+		 Site last generated: Dec 22, 2023 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />

@@ -1525,14 +1525,14 @@ The values are passed as following:</p>
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">precice</span><span class="o">::</span><span class="n">Participant</span> <span class="nf">precice</span><span class="p">(</span><span class="s">"FluidSolver"</span><span class="p">,</span> <span class="s">"precice-config.xml"</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span> <span class="c1">// constructor</span>
 
 <span class="kt">int</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshDimensions</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">);</span>
-<span class="p">[...]</span>
+<span class="cm">/* ... */</span>
 <span class="n">precice</span><span class="p">.</span><span class="n">setMeshVertices</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="n">vertexSize</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">);</span>
 
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">stress</span><span class="p">(</span><span class="n">vertexSize</span> <span class="o">*</span> <span class="n">dim</span><span class="p">);</span>
 
 <span class="c1">// create gradient data</span>
 <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">stressGradient</span><span class="p">(</span><span class="n">vertexSize</span> <span class="o">*</span> <span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">)</span>
-<span class="p">[...]</span>
+<span class="cm">/* ... */</span>
 <span class="n">precice</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
 
 <span class="k">while</span> <span class="p">(</span><span class="n">not</span> <span class="nf">simulationDone</span><span class="p">()){</span> <span class="c1">// time loop</span>
@@ -1547,14 +1547,14 @@ The values are passed as following:</p>
   <span class="n">precice</span><span class="p">.</span><span class="n">writeData</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="s">"Stress"</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">,</span> <span class="n">stress</span><span class="p">);</span>
 
   <span class="c1">// write gradient data</span>
-  <span class="k">if</span> <span class="p">(</span><span class="n">isGradientDataRequired</span><span class="p">(</span><span class="n">dataID</span><span class="p">)){</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">requiresGradientDataFor</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">)){</span>
     <span class="n">computeStressGradient</span><span class="p">(</span><span class="n">stressGradient</span><span class="p">)</span>
     <span class="n">precice</span><span class="p">.</span><span class="n">writeGradientData</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="s">"Stress"</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">,</span> <span class="n">stressGradient</span><span class="p">);</span>
   <span class="p">}</span>
 
   <span class="n">precice</span><span class="p">.</span><span class="n">advance</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="p">[...]</span>
+<span class="cm">/* ... */</span>
 </code></pre></div></div>
 
 <div class="alert alert-warning" role="alert"><i class="fas fa-flask"></i> <b>Experimental:</b> 
@@ -1612,7 +1612,7 @@ For preCICE versions lower than 2.5.0, you need to set the flag <code class="lan
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Dec 15, 2023 <br />
+		 Site last generated: Dec 22, 2023 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
