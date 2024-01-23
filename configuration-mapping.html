@@ -1656,6 +1656,47 @@ Although this feature is well-tested in preCICE, it relies on an unreleased vers
 
 <p>More details on the feature can be found in <a href="https://doi.org/10.23967/c.coupled.2023.016">Schneider et al. 2023</a>.</p>
 
+<h2 id="geometric-multiscale-mapping">Geometric multiscale mapping</h2>
+
+<p>Geometric multiscale mapping enables the coupling of dimensionally heterogeneous coupling participants, e.g., a 1D system code with a 3D CFD code.</p>
+
+<div class="alert alert-warning" role="alert"><i class="fas fa-flask"></i> <b>Experimental:</b> 
+This is an experimental feature, available since preCICE v3.0.0. Enable it using <code class="language-plaintext highlighter-rouge">&lt;precice-configuration experimental="true"&gt;</code> and do not consider the configuration to be stable yet. For now, since preCICE does not yet support 1D meshes, both input and output meshes are defined as 3D, and a primary axis defines the active component of the 1D data. Are you interested in this feature? Give us your feedback!
+</div>
+
+<p>We differentiate between <em>axial</em> and <em>radial</em> geometric multiscale mapping:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td><img src="images/docs/configuration-mapping-geometric-multiscale-axial-1d-3d.png" alt="Axial geometric multiscale mapping" width="500" /></td>
+      <td><img src="images/docs/configuration-mapping-geometric-multiscale-radial-1d-3d.png" alt="Radial geometric multiscale mapping" width="500" /></td>
+    </tr>
+    <tr>
+      <td>Axial 1D-3D consistent-spread mapping</td>
+      <td>Radial 1D-3D consisntent-spread mapping</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>In a 1D-3D mapping, axial mapping maps between one point at the boundary of the 1D domain and multiple points at a surface of a 3D domain, while the domains are connected over a main axis.
+Radial mapping maps between multiple (internal) points of the 1D domain and multiple points at a surface of a 3D domain. In a 1D-3D domain, the 3D domain can encapsulate the 1D domain, or the 1D domain can be a line on the surface of the 3D domain.
+Currently, axial and radial geometric multiscale coupling is only supported in a consistent manner between 1D and 3D participants and over a circular interface, but extensions to this are planned.</p>
+
+<p>The concept also extends to 1D-2D, 2D-3D, and further setups, which are not currently supported.</p>
+
+<p>Potential configurations for the axial and radial geometric multiscale mapping look as follows:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;mapping:axial-geometric-multiscale</span> <span class="na">direction=</span><span class="s">"read"</span> <span class="na">type=</span><span class="s">"spread"</span> <span class="na">radius=</span><span class="s">"1.0"</span> <span class="na">axis=</span><span class="s">"X"</span> <span class="na">from=</span><span class="s">"MyMesh2"</span> <span class="na">to=</span><span class="s">"MyMesh1"</span> <span class="na">constraint=</span><span class="s">"consistent"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;mapping:radial-geometric-multiscale</span> <span class="na">direction=</span><span class="s">"read"</span> <span class="na">type=</span><span class="s">"collect"</span> <span class="na">axis=</span><span class="s">"X"</span> <span class="na">from=</span><span class="s">"MyMesh1"</span> <span class="na">to=</span><span class="s">"MyMesh2"</span> <span class="na">constraint=</span><span class="s">"consistent"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">type</code> which can be either <code class="language-plaintext highlighter-rouge">"spread"</code> or <code class="language-plaintext highlighter-rouge">"collect"</code> refers to whether the participant spreads data from one mesh node to multiple nodes or collects data from multiple mesh nodes into one node. The <code class="language-plaintext highlighter-rouge">axis</code> is the main axis, along which the coupling takes place, i.e. the principal axis of the 1D and 3D participants. The <code class="language-plaintext highlighter-rouge">radius</code> refers to the radius of the circular interface boundary surface.</p>
+
+<p>Since the 1D participant likely computes average quantities, e.g., the average pressure and velocity in a pipe, a velocity profile has to be assumed in order to convert data between the 1D and 3D participant for the axial mapping. Currently, a laminar flow profile is imposed by default, but different profiles might be supported in the future.</p>
+
 <h2 id="restrictions-for-parallel-participants">Restrictions for parallel participants</h2>
 
 <p>As stated above, for parallel participants only <code class="language-plaintext highlighter-rouge">read</code>-<code class="language-plaintext highlighter-rouge">consistent</code> and <code class="language-plaintext highlighter-rouge">write</code>-<code class="language-plaintext highlighter-rouge">conservative</code> are valid combinations. If want to find out why, have a look at <a href="https://mediatum.ub.tum.de/doc/1320661/document.pdf">Benjamin’s thesis</a>, page 85. But what to do if you want a <code class="language-plaintext highlighter-rouge">write</code>-<code class="language-plaintext highlighter-rouge">consistent</code> mapping? The trick is to move the mapping to the other participant, then <code class="language-plaintext highlighter-rouge">write</code> becomes <code class="language-plaintext highlighter-rouge">read</code>:</p>
@@ -1686,7 +1727,7 @@ After applying these changes, you can use the <a href="https://github.com/precic
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Jan 11, 2024 <br />
+		 Site last generated: Jan 23, 2024 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
