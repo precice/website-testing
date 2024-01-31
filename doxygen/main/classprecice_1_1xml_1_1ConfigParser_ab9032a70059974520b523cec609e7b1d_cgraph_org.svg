@@ -67,7 +67,7 @@
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="namespaceprecice_1_1xml.html#a99ecd990fbffacfc4e0b5d789250bcbf" target="_top" xlink:title=" ">
+<g id="a_node8"><a xlink:href="namespaceprecice_1_1xml.html#ac2900d138afeb687f3b88df26c7344b0" target="_top" xlink:title=" ">
 <polygon fill="white" stroke="black" points="192.5,-1.5 192.5,-31.5 338.5,-31.5 338.5,-1.5 192.5,-1.5"/>
 <text text-anchor="start" x="200.5" y="-19.5" font-family="Helvetica,sans-Serif" font-size="10.00">precice::xml::OnStructured</text>
 <text text-anchor="middle" x="265.5" y="-8.5" font-family="Helvetica,sans-Serif" font-size="10.00">ErrorFunc</text>

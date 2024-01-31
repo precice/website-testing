@@ -257,9 +257,14 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:af8c6dda5b8114131533138d610f136f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#af8c6dda5b8114131533138d610f136f6">computeMappings</a> (std::vector&lt; <a class="el" href="structprecice_1_1impl_1_1MappingContext.html">MappingContext</a> &gt; &amp;contexts, const std::string &amp;mappingType)</td></tr>
 <tr class="memdesc:af8c6dda5b8114131533138d610f136f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for mapWrittenData and mapReadData.  <a href="classprecice_1_1impl_1_1ParticipantImpl.html#af8c6dda5b8114131533138d610f136f6">More...</a><br /></td></tr>
 <tr class="separator:af8c6dda5b8114131533138d610f136f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a863864956a067c125bb1305c4fad6ee3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#a863864956a067c125bb1305c4fad6ee3">mapInitialWrittenData</a> ()</td></tr>
+<tr class="memdesc:a863864956a067c125bb1305c4fad6ee3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes, and performs write mappings of the initial data in initialize.  <a href="classprecice_1_1impl_1_1ParticipantImpl.html#a863864956a067c125bb1305c4fad6ee3">More...</a><br /></td></tr>
+<tr class="separator:a863864956a067c125bb1305c4fad6ee3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af636499d1a821595ff12482c0d8da45d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#af636499d1a821595ff12482c0d8da45d">mapWrittenData</a> (std::optional&lt; double &gt; after=std::nullopt)</td></tr>
 <tr class="memdesc:af636499d1a821595ff12482c0d8da45d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes, and performs suitable write mappings either entirely or after given time.  <a href="classprecice_1_1impl_1_1ParticipantImpl.html#af636499d1a821595ff12482c0d8da45d">More...</a><br /></td></tr>
 <tr class="separator:af636499d1a821595ff12482c0d8da45d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a797be00b7d98594cbe2d8be3e98eae41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#a797be00b7d98594cbe2d8be3e98eae41">mapInitialReadData</a> ()</td></tr>
+<tr class="separator:a797be00b7d98594cbe2d8be3e98eae41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99c62e6b00ff868443bdf4901f479beb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#a99c62e6b00ff868443bdf4901f479beb">mapReadData</a> ()</td></tr>
 <tr class="separator:a99c62e6b00ff868443bdf4901f479beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad3bf6aa28af4574ae5836e2e40b8203"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#aad3bf6aa28af4574ae5836e2e40b8203">trimReadMappedData</a> (double timeAfterAdvance, bool <a class="el" href="classprecice_1_1impl_1_1ParticipantImpl.html#aba79e596fdde7c66a2f9067e7807c774">isTimeWindowComplete</a>, const <a class="el" href="structprecice_1_1cplscheme_1_1ImplicitData.html">cplscheme::ImplicitData</a> &amp;fromData)</td></tr>
@@ -394,7 +399,7 @@ Friends</h2></td></tr>
 <tr><td class="fieldname"><a id="a06fa123bfb66b2c1091e1f0a50026d16a8c16cbebef45d87fd2b36ce69f46c526"></a>Distributed&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00421">421</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00427">427</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
 
 </div>
 </div>
@@ -674,7 +679,7 @@ Here is the call graph for this function:</div>
 
 <p>Advances the coupling schemes. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01513">1513</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01538">1538</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 
 </div>
 </div>
@@ -704,7 +709,7 @@ Here is the call graph for this function:</div>
 
 <p>Syncs the primary ranks of all connected participants. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01526">1526</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01551">1551</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -974,7 +979,7 @@ Here is the call graph for this function:</div>
 
 <p>Determines participant accessing this interface from the configuration. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01470">1470</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01495">1495</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1358,7 +1363,7 @@ Here is the call graph for this function:</div>
 
 <p>Exports meshes with data and watch point data. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01450">1450</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01475">1475</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1430,7 +1435,7 @@ Here is the call graph for this function:</div>
 
 <p>Initializes intra-participant communication. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01485">1485</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01510">1510</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1498,6 +1503,74 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
+<a id="a797be00b7d98594cbe2d8be3e98eae41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a797be00b7d98594cbe2d8be3e98eae41">&#9670;&nbsp;</a></span>mapInitialReadData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void precice::impl::ParticipantImpl::mapInitialReadData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01439">1439</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classprecice_1_1impl_1_1ParticipantImpl_a797be00b7d98594cbe2d8be3e98eae41_cgraph.svg" width="431" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
+<a id="a863864956a067c125bb1305c4fad6ee3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a863864956a067c125bb1305c4fad6ee3">&#9670;&nbsp;</a></span>mapInitialWrittenData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void precice::impl::ParticipantImpl::mapInitialWrittenData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Computes, and performs write mappings of the initial data in initialize. </p>
+
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01398">1398</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classprecice_1_1impl_1_1ParticipantImpl_a863864956a067c125bb1305c4fad6ee3_cgraph.svg" width="446" height="52"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 <a id="a9b489edd096c2b4e170bccdff74e3ec1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9b489edd096c2b4e170bccdff74e3ec1">&#9670;&nbsp;</a></span>mappedSamples()</h2>
 
@@ -1515,7 +1588,7 @@ Here is the call graph for this function:</div>
 
 <p>Returns the amount of mapped read and write samples in the last call to advance. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01567">1567</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01592">1592</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1542,7 +1615,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01427">1427</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01452">1452</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1578,7 +1651,7 @@ Here is the call graph for this function:</div>
 
 <p>Computes, and performs suitable write mappings either entirely or after given time. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01398">1398</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01410">1410</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1607,7 +1680,7 @@ Here is the call graph for this function:</div>
 <p>Allows to access a registered mesh. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000011">Todo:</a></b></dt><dd>try to remove or make private. See <a href="https://github.com/precice/precice/issues/1269">https://github.com/precice/precice/issues/1269</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01561">1561</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01586">1586</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1699,7 +1772,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01440">1440</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01465">1465</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 
 </div>
 </div>
@@ -1999,7 +2072,7 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01462">1462</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01487">1487</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 
 </div>
 </div>
@@ -2682,7 +2755,7 @@ Here is the call graph for this function:</div>
 
 <p>Syncs the time step size between all ranks (all time steps sizes should be the same!) </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01496">1496</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01521">1521</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -2765,7 +2838,7 @@ Here is the call graph for this function:</div>
 <p>Removes samples in mapped to data connected to received data via a mapping. </p>
 <p>This prevents old samples from blocking remappings. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01410">1410</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8cpp_source.html#l01422">1422</a> of file <a class="el" href="ParticipantImpl_8cpp_source.html">ParticipantImpl.cpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -2985,7 +3058,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00446">446</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00452">452</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
 
 </div>
 </div>
@@ -3011,7 +3084,7 @@ Here is the call graph for this function:</div>
 
 <p>To allow white box tests. </p>
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00445">445</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00451">451</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
 
 </div>
 </div>
@@ -3436,7 +3509,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00449">449</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00455">455</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
 
 </div>
 </div>
@@ -3460,7 +3533,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00448">448</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ParticipantImpl_8hpp_source.html#l00454">454</a> of file <a class="el" href="ParticipantImpl_8hpp_source.html">ParticipantImpl.hpp</a>.</p>
 
 </div>
 </div>

@@ -86,10 +86,10 @@
 <!-- Node6 -->
 <g id="node6" class="node">
 <title>Node6</title>
-<g id="a_node6"><a xlink:href="classprecice_1_1impl_1_1ParticipantImpl.html#a99c62e6b00ff868443bdf4901f479beb" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="black" points="185.5,-318.5 185.5,-348.5 322.5,-348.5 322.5,-318.5 185.5,-318.5"/>
-<text text-anchor="start" x="193.5" y="-336.5" font-family="Helvetica,sans-Serif" font-size="10.00">precice::impl::Participant</text>
-<text text-anchor="middle" x="254" y="-325.5" font-family="Helvetica,sans-Serif" font-size="10.00">Impl::mapReadData</text>
+<g id="a_node6"><a xlink:href="classprecice_1_1impl_1_1ParticipantImpl.html#a797be00b7d98594cbe2d8be3e98eae41" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="black" points="183,-318.5 183,-348.5 325,-348.5 325,-318.5 183,-318.5"/>
+<text text-anchor="start" x="191" y="-336.5" font-family="Helvetica,sans-Serif" font-size="10.00">precice::impl::Participant</text>
+<text text-anchor="middle" x="254" y="-325.5" font-family="Helvetica,sans-Serif" font-size="10.00">Impl::mapInitialReadData</text>
 </a>
 </g>
 </g>
@@ -102,18 +102,18 @@
 <!-- Node8 -->
 <g id="node8" class="node">
 <title>Node8</title>
-<g id="a_node8"><a xlink:href="classprecice_1_1impl_1_1ParticipantImpl.html#af636499d1a821595ff12482c0d8da45d" target="_top" xlink:title="Computes, and performs suitable write mappings either entirely or after given time.">
-<polygon fill="white" stroke="black" points="185.5,-269.5 185.5,-299.5 322.5,-299.5 322.5,-269.5 185.5,-269.5"/>
-<text text-anchor="start" x="193.5" y="-287.5" font-family="Helvetica,sans-Serif" font-size="10.00">precice::impl::Participant</text>
-<text text-anchor="middle" x="254" y="-276.5" font-family="Helvetica,sans-Serif" font-size="10.00">Impl::mapWrittenData</text>
+<g id="a_node8"><a xlink:href="classprecice_1_1impl_1_1ParticipantImpl.html#a863864956a067c125bb1305c4fad6ee3" target="_top" xlink:title="Computes, and performs write mappings of the initial data in initialize.">
+<polygon fill="white" stroke="black" points="177.5,-269.5 177.5,-299.5 330.5,-299.5 330.5,-269.5 177.5,-269.5"/>
+<text text-anchor="start" x="185.5" y="-287.5" font-family="Helvetica,sans-Serif" font-size="10.00">precice::impl::Participant</text>
+<text text-anchor="middle" x="254" y="-276.5" font-family="Helvetica,sans-Serif" font-size="10.00">Impl::mapInitialWrittenData</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node8 -->
 <g id="edge7" class="edge">
 <title>Node1&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M137.05,-284.5C149.46,-284.5 162.52,-284.5 175.21,-284.5"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="175.29,-288 185.29,-284.5 175.29,-281 175.29,-288"/>
+<path fill="none" stroke="midnightblue" d="M137.05,-284.5C146.86,-284.5 157.07,-284.5 167.18,-284.5"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="167.24,-288 177.24,-284.5 167.24,-281 167.24,-288"/>
 </g>
 <!-- Node9 -->
 <g id="node9" class="node">
@@ -208,14 +208,14 @@
 <!-- Node6&#45;&gt;Node7 -->
 <g id="edge6" class="edge">
 <title>Node6&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M322.55,-324.3C334.96,-322.61 348.02,-320.83 360.71,-319.1"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="361.35,-322.54 370.79,-317.72 360.41,-315.61 361.35,-322.54"/>
+<path fill="none" stroke="midnightblue" d="M325.16,-323.94C336.74,-322.36 348.81,-320.72 360.57,-319.12"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="361.36,-322.54 370.8,-317.72 360.42,-315.61 361.36,-322.54"/>
 </g>
 <!-- Node8&#45;&gt;Node7 -->
 <g id="edge8" class="edge">
 <title>Node8&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M322.55,-293.33C334.96,-294.96 348.02,-296.67 360.71,-298.33"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="360.42,-301.82 370.79,-299.64 361.33,-294.88 360.42,-301.82"/>
+<path fill="none" stroke="midnightblue" d="M330.7,-294.4C340.69,-295.71 350.95,-297.05 360.98,-298.36"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="360.54,-301.83 370.91,-299.66 361.44,-294.89 360.54,-301.83"/>
 </g>
 <!-- Node12 -->
 <g id="node12" class="node">
