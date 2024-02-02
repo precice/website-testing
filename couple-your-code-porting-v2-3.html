@@ -1604,6 +1604,25 @@ Please add breaking changes here when merged to the <code class="language-plaint
       <li>Consider renaming your objects from, e.g., <code class="language-plaintext highlighter-rouge">interface</code> to <code class="language-plaintext highlighter-rouge">participant</code>, to better reflect the purpose and to be consistent with the rest of the changes.</li>
     </ul>
   </li>
+  <li>Steering methods
+    <ul>
+      <li>Replace <code class="language-plaintext highlighter-rouge">double preciceDt = initialize()</code> and <code class="language-plaintext highlighter-rouge">double preciceDt = advance(dt)</code> with <code class="language-plaintext highlighter-rouge">initialize()</code> and <code class="language-plaintext highlighter-rouge">advance(dt)</code>, as they no longer have a return value.</li>
+      <li>Use <code class="language-plaintext highlighter-rouge">double preciceDt = getMaxTimeStepSize()</code>, where you need the max time step size or the relative end of the time window.</li>
+    </ul>
+  </li>
+  <li>Dimensions
+    <ul>
+      <li>Replace <code class="language-plaintext highlighter-rouge">getDimensions()</code> with <code class="language-plaintext highlighter-rouge">getMeshDimensions(meshName)</code></li>
+      <li>Replace any custom logic to determine the dimensionality of data with <code class="language-plaintext highlighter-rouge">getDataDimensions(meshName, dataName)</code></li>
+    </ul>
+  </li>
+  <li>Migrate from using mesh and data ids to directly using names
+    <ul>
+      <li>Remove the now obsolete calls to <code class="language-plaintext highlighter-rouge">getMeshID()</code> and <code class="language-plaintext highlighter-rouge">getDataID()</code> and any related variables / user-defined types.</li>
+      <li>Replace the use of mesh IDs with the mesh name.</li>
+      <li>Replace the use of data IDs with the respective mesh and data names.</li>
+    </ul>
+  </li>
   <li>Migrate connectivity information to the vertex-only API. All <code class="language-plaintext highlighter-rouge">setMeshX</code> methods take vertex IDs as input and return nothing.
     <ul>
       <li>Directly define face elements or cells of your coupling mesh available in your solver by passing their vectices to preCICE, which automatically handles edges of triangles etc. See <a href="couple-your-code-defining-mesh-connectivity">Mesh Connectivity</a> for more information.</li>
@@ -1611,37 +1630,48 @@ Please add breaking changes here when merged to the <code class="language-plaint
       <li>Use the new bulk functions to reduce sanitization overhead: <code class="language-plaintext highlighter-rouge">setMeshEdges</code>, <code class="language-plaintext highlighter-rouge">setMeshTriangles</code>, <code class="language-plaintext highlighter-rouge">setMeshQuads</code>, <code class="language-plaintext highlighter-rouge">setMeshTetrahedra</code>.</li>
     </ul>
   </li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">mapWriteDataFrom()</code> and <code class="language-plaintext highlighter-rouge">mapReadDataTo()</code>.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">initializeData()</code>. The functions <code class="language-plaintext highlighter-rouge">initializeData()</code> and <code class="language-plaintext highlighter-rouge">ìnitialize()</code> have been merged into the new function <code class="language-plaintext highlighter-rouge">initialize()</code>. Before calling <code class="language-plaintext highlighter-rouge">ìnitialize()</code>, you have to initialize the mesh and the data ( if <code class="language-plaintext highlighter-rouge">requiresInitialData()</code> is <code class="language-plaintext highlighter-rouge">true</code>).</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">isReadDataAvailable()</code> and <code class="language-plaintext highlighter-rouge">isWriteDataRequired()</code>, or replace them with your own logic if you are subcycling in your adapter.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">getMeshVertices()</code> and <code class="language-plaintext highlighter-rouge">getMeshVertexIDsFromPositions()</code>. This information is already known by the adapter.</li>
-  <li>Replace <code class="language-plaintext highlighter-rouge">isActionRequired()</code> with their respective requirement clause: <code class="language-plaintext highlighter-rouge">requiresInitialData()</code>, <code class="language-plaintext highlighter-rouge">requiresReadingCheckpoint()</code> or <code class="language-plaintext highlighter-rouge">requiresWritingCheckpoint()</code>.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">precice::constants::*</code> and corresponding <code class="language-plaintext highlighter-rouge">#include</code> statements as they are no longer needed.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">markActionFullfiled()</code>. If <code class="language-plaintext highlighter-rouge">requiresInitialData()</code>, <code class="language-plaintext highlighter-rouge">requiresReadingCheckpoint()</code>, or <code class="language-plaintext highlighter-rouge">requiresWritingCheckpoint()</code> are called, then they are promised to be acted on. Therefore, <code class="language-plaintext highlighter-rouge">markActionFullfiled()</code> is no longer needed.</li>
-  <li>Replace <code class="language-plaintext highlighter-rouge">isMeshConnectivityRequired</code> with <code class="language-plaintext highlighter-rouge">requiresMeshConnectivityFor</code>. Instead of the input argument <code class="language-plaintext highlighter-rouge">meshID</code>, pass the <code class="language-plaintext highlighter-rouge">meshName</code>.</li>
-  <li>Replace <code class="language-plaintext highlighter-rouge">isGradientDataRequired</code> with <code class="language-plaintext highlighter-rouge">requiresGradientDataFor</code>. Instead of the input argument <code class="language-plaintext highlighter-rouge">dataID</code>, pass the <code class="language-plaintext highlighter-rouge">meshName</code> and <code class="language-plaintext highlighter-rouge">dataName</code>.</li>
-  <li>Remove the now obsolete calls to <code class="language-plaintext highlighter-rouge">getMeshID()</code> and <code class="language-plaintext highlighter-rouge">getDataID()</code>.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">hasMesh()</code> and <code class="language-plaintext highlighter-rouge">hasData()</code>.</li>
-  <li>Replace the commands to read data: <code class="language-plaintext highlighter-rouge">readBlockVectorData</code>, <code class="language-plaintext highlighter-rouge">readVectorData</code>, <code class="language-plaintext highlighter-rouge">readBlockScalarData</code>, <code class="language-plaintext highlighter-rouge">readScalarData</code> with a single command <code class="language-plaintext highlighter-rouge">readData</code>.</li>
-  <li>Replace the commands to write data: <code class="language-plaintext highlighter-rouge">writeBlockVectorData</code>, <code class="language-plaintext highlighter-rouge">writeVectorData</code>, <code class="language-plaintext highlighter-rouge">writeBlockScalarData</code>, <code class="language-plaintext highlighter-rouge">writeScalarData</code> with a single command <code class="language-plaintext highlighter-rouge">writeData</code>.</li>
-  <li>Replace the commands to write gradient data: <code class="language-plaintext highlighter-rouge">writeBlockVectorGradientData</code>, <code class="language-plaintext highlighter-rouge">writeVectorGradientData</code>, <code class="language-plaintext highlighter-rouge">writeBlockScalarGradientData</code>, <code class="language-plaintext highlighter-rouge">writeScalarGradientData</code> with a single command <code class="language-plaintext highlighter-rouge">writeGradientData</code>.</li>
-  <li>The signature of <code class="language-plaintext highlighter-rouge">readData</code>, <code class="language-plaintext highlighter-rouge">writeData</code> and <code class="language-plaintext highlighter-rouge">writeGradientData</code> has changed from <code class="language-plaintext highlighter-rouge">const int*</code>, <code class="language-plaintext highlighter-rouge">const double*</code>, and <code class="language-plaintext highlighter-rouge">double*</code> to <code class="language-plaintext highlighter-rouge">span&lt;const VertexID&gt;</code>, <code class="language-plaintext highlighter-rouge">span&lt;const double&gt;</code>, and <code class="language-plaintext highlighter-rouge">span&lt;double&gt;</code>. If necessary change the data object, e.g., from <code class="language-plaintext highlighter-rouge">double* forces = new double[vertexSize*dim]</code> to <code class="language-plaintext highlighter-rouge">std::vector&lt;double&gt; forces(vertexSize*dim)</code> and remove <code class="language-plaintext highlighter-rouge">.data()</code> in the function arguments.</li>
-  <li>Replace <code class="language-plaintext highlighter-rouge">getMeshVerticesAndIDs</code> with <code class="language-plaintext highlighter-rouge">getMeshVertexIDsAndCoordinates</code>. Change the input argument meshID to meshName.</li>
-  <li>Change integer input argument <code class="language-plaintext highlighter-rouge">meshID</code> to a string with the mesh name in the API commands <code class="language-plaintext highlighter-rouge">hasMesh</code>, <code class="language-plaintext highlighter-rouge">requiresMeshConnectivityFor</code>, <code class="language-plaintext highlighter-rouge">setMeshVertex</code>, <code class="language-plaintext highlighter-rouge">getMeshVertexSize</code>, <code class="language-plaintext highlighter-rouge">setMeshVertices</code>, <code class="language-plaintext highlighter-rouge">setMeshEdge</code>, <code class="language-plaintext highlighter-rouge">setMeshEdges</code>, <code class="language-plaintext highlighter-rouge">setMeshTriangle</code>, <code class="language-plaintext highlighter-rouge">setMeshTriangles</code>, <code class="language-plaintext highlighter-rouge">setMeshQuad</code>, <code class="language-plaintext highlighter-rouge">setMeshQuads</code>, <code class="language-plaintext highlighter-rouge">setMeshTetrahedron</code>, <code class="language-plaintext highlighter-rouge">setMeshTetrahedrons</code>, <code class="language-plaintext highlighter-rouge">setMeshAccessRegion</code>.</li>
-  <li>Change integer input argument <code class="language-plaintext highlighter-rouge">dataID</code> to string arguments mesh name and data name in the API commands <code class="language-plaintext highlighter-rouge">hasData</code>.</li>
-  <li>Replace <code class="language-plaintext highlighter-rouge">double preciceDt = initialize()</code> and <code class="language-plaintext highlighter-rouge">double preciceDt = advance(dt)</code> with <code class="language-plaintext highlighter-rouge">initialize()</code> and <code class="language-plaintext highlighter-rouge">advance(dt)</code>, as they don’t have a return value. If you need to know <code class="language-plaintext highlighter-rouge">preciceDt</code>, you can use <code class="language-plaintext highlighter-rouge">double preciceDt = getMaxTimeStepSize()</code>.</li>
-  <li>
-    <p>Replace <code class="language-plaintext highlighter-rouge">getDimensions()</code> with either <code class="language-plaintext highlighter-rouge">getMeshDimensions(meshName)</code> or <code class="language-plaintext highlighter-rouge">getDataDimensions(meshName, dataName)</code>, depending on whether the mesh dimension or data dimension is required.</p>
-  </li>
-  <li>Renamed CMake variables as follows:
+  <li>Implicit coupling
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_PETScMapping</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_PETSC_MAPPING</code></li>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_MPICommunication</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_MPI_COMMUNICATION</code></li>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_Packages</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_CONFIGURE_PACKAGE_GENERATION</code></li>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_PythonActions</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_PYTHON_ACTIONS</code></li>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_ENABLE_C</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_BINDINGS_C</code></li>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_ENABLE_FORTRAN</code> -&gt;<code class="language-plaintext highlighter-rouge">PRECICE_BINDINGS_FORTRAN</code></li>
-      <li><code class="language-plaintext highlighter-rouge">PRECICE_ENABLE_LIBBACKTRACE</code>  -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_LIBBACKTRACE_STACKTRACES</code></li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">precice::constants::actionReadIterationCheckpoint()</code> and <code class="language-plaintext highlighter-rouge">precice::constants::actionWriteIterationCheckpoint()</code>
+        <ul>
+          <li>Replace <code class="language-plaintext highlighter-rouge">isActionRequired()</code> of the above actions with <code class="language-plaintext highlighter-rouge">requiresReadingCheckpoint()</code> or <code class="language-plaintext highlighter-rouge">requiresWritingCheckpoint()</code>.</li>
+          <li>Remove <code class="language-plaintext highlighter-rouge">markActionFulfilled()</code> of the above actions. It is now implied that a <code class="language-plaintext highlighter-rouge">requires*()</code> is directly executed/fulfilled.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Migrate data access
+    <ul>
+      <li>Replace the commands to read data: <code class="language-plaintext highlighter-rouge">readBlockVectorData</code>, <code class="language-plaintext highlighter-rouge">readVectorData</code>, <code class="language-plaintext highlighter-rouge">readBlockScalarData</code>, <code class="language-plaintext highlighter-rouge">readScalarData</code> with the single command <code class="language-plaintext highlighter-rouge">readData</code>.</li>
+      <li>Replace the commands to write data: <code class="language-plaintext highlighter-rouge">writeBlockVectorData</code>, <code class="language-plaintext highlighter-rouge">writeVectorData</code>, <code class="language-plaintext highlighter-rouge">writeBlockScalarData</code>, <code class="language-plaintext highlighter-rouge">writeScalarData</code> with the single command <code class="language-plaintext highlighter-rouge">writeData</code>.</li>
+      <li>Replace the commands to write gradient data: <code class="language-plaintext highlighter-rouge">writeBlockVectorGradientData</code>, <code class="language-plaintext highlighter-rouge">writeVectorGradientData</code>, <code class="language-plaintext highlighter-rouge">writeBlockScalarGradientData</code>, <code class="language-plaintext highlighter-rouge">writeScalarGradientData</code> with the single command <code class="language-plaintext highlighter-rouge">writeGradientData</code>.</li>
+      <li>The signature of <code class="language-plaintext highlighter-rouge">readData</code>, <code class="language-plaintext highlighter-rouge">writeData</code> and <code class="language-plaintext highlighter-rouge">writeGradientData</code> has changed from <code class="language-plaintext highlighter-rouge">const int*</code>, <code class="language-plaintext highlighter-rouge">const double*</code>, and <code class="language-plaintext highlighter-rouge">double*</code> to <code class="language-plaintext highlighter-rouge">precice::span&lt;const VertexID&gt;</code>, <code class="language-plaintext highlighter-rouge">precice::span&lt;const double&gt;</code>, and <code class="language-plaintext highlighter-rouge">span&lt;double&gt;</code>. The sizes of passed spans are checked by preCICE. spans can be constructed using a pointer and size, or by a contigous container. Examples for the latter are <code class="language-plaintext highlighter-rouge">std::vector</code>, <code class="language-plaintext highlighter-rouge">std:array</code>, <code class="language-plaintext highlighter-rouge">Eigen::VectorXd</code>, and also <code class="language-plaintext highlighter-rouge">std::span</code>.</li>
+      <li>To simplify migration to <code class="language-plaintext highlighter-rouge">readData()</code>, use <code class="language-plaintext highlighter-rouge">getMaxTimeStepSize()</code> as relative read time for now to always read data at the end of the time window. Read up on <a href="couple-your-code-waveform.html">time interpolation</a> once you finished the port.</li>
+    </ul>
+  </li>
+  <li>Migrate data initialization
+    <ul>
+      <li>Move the data initalization before the call to <code class="language-plaintext highlighter-rouge">initialize()</code>. You have to initialize the data if <code class="language-plaintext highlighter-rouge">requiresInitialData()</code> returns <code class="language-plaintext highlighter-rouge">true</code>.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">initializeData()</code>. The function <code class="language-plaintext highlighter-rouge">initializeData()</code> has been merged into <code class="language-plaintext highlighter-rouge">ìnitialize()</code>.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">precice::constants::actionWriteInitialData()</code>.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">markActionFulfilled()</code> of write initial data.</li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">isActionRequired()</code> of write initial data with <code class="language-plaintext highlighter-rouge">requiresInitialData()</code>.</li>
+    </ul>
+  </li>
+  <li>Rename the functions:
+    <ul>
+      <li>Replace <code class="language-plaintext highlighter-rouge">getMeshVerticesAndIDs</code> with <code class="language-plaintext highlighter-rouge">getMeshVertexIDsAndCoordinates</code>. Change the input argument meshID to meshName and swap the arguments for IDs and coordinates.</li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">isMeshConnectivityRequired</code> with <code class="language-plaintext highlighter-rouge">requiresMeshConnectivityFor</code>. Instead of the input argument <code class="language-plaintext highlighter-rouge">meshID</code>, pass the <code class="language-plaintext highlighter-rouge">meshName</code>.</li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">isGradientDataRequired</code> with <code class="language-plaintext highlighter-rouge">requiresGradientDataFor</code>. Instead of the input argument <code class="language-plaintext highlighter-rouge">dataID</code>, pass the <code class="language-plaintext highlighter-rouge">meshName</code> and <code class="language-plaintext highlighter-rouge">dataName</code>.</li>
+    </ul>
+  </li>
+  <li>Remove the following without a replacement:
+    <ul>
+      <li>Remove <code class="language-plaintext highlighter-rouge">mapWriteDataFrom()</code> and <code class="language-plaintext highlighter-rouge">mapReadDataTo()</code> as custom timings were removed.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">hasMesh()</code> and <code class="language-plaintext highlighter-rouge">hasData()</code> as there is no real usecase for them. All errors are unrecoverable.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">hasToEvaluateSurrogateModel()</code> and <code class="language-plaintext highlighter-rouge">hasToEvaluateFineModel()</code> as they were stubs of a long-removed feature.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">getMeshVertices()</code> and <code class="language-plaintext highlighter-rouge">getMeshVertexIDsFromPositions()</code>. This information is already known by the adapter. We docummented <a href="couple-your-code-defining-mesh-connectivity.html">strategies on how to handle this</a> in adpters.</li>
+      <li>Remove <code class="language-plaintext highlighter-rouge">isReadDataAvailable()</code> and <code class="language-plaintext highlighter-rouge">isWriteDataRequired()</code>. Due to time interpolation, writing generates samples in time, and reading is always possible between the current time and the end of the current time window.</li>
     </ul>
   </li>
 </ul>
@@ -1697,64 +1727,76 @@ Please add breaking changes here when merged to the <code class="language-plaint
 <ul>
   <li>The XML tag <code class="language-plaintext highlighter-rouge">&lt;solver-interface&gt;</code> was removed and all underlying functionality was moved to the <code class="language-plaintext highlighter-rouge">&lt;precice-configuration&gt;</code> tag. Remove the lines including <code class="language-plaintext highlighter-rouge">&lt;solver-interface&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;/solver-interface&gt;</code>, and move any attributes (such as <code class="language-plaintext highlighter-rouge">experimental</code>) from the <code class="language-plaintext highlighter-rouge">solver-interface</code> to the <code class="language-plaintext highlighter-rouge">precice-configuration</code> tag. Move the <code class="language-plaintext highlighter-rouge">sync-mode</code> attribute to the new <code class="language-plaintext highlighter-rouge">&lt;profiling&gt;</code> tag (see below).</li>
   <li>The <code class="language-plaintext highlighter-rouge">dimensions</code> configuration is now defined per mesh. Move the <code class="language-plaintext highlighter-rouge">dimensions="2"</code> or <code class="language-plaintext highlighter-rouge">dimensions="3"</code> from the <code class="language-plaintext highlighter-rouge">&lt;solver-interface&gt;</code> tag to each <code class="language-plaintext highlighter-rouge">&lt;mesh&gt;</code> tag: <code class="language-plaintext highlighter-rouge">&lt;mesh name="MeshOne" dimensions="3"&gt;</code>.</li>
-  <li>Replace mapping constraint <code class="language-plaintext highlighter-rouge">scaled-consistent</code> with <code class="language-plaintext highlighter-rouge">scaled-consistent-surface</code>.</li>
-  <li>Replace <code class="language-plaintext highlighter-rouge">&lt;use-mesh provide="true" ... /&gt;</code> with <code class="language-plaintext highlighter-rouge">&lt;provide-mesh ... /&gt;</code>, and <code class="language-plaintext highlighter-rouge">&lt;use-mesh provide="false" ... /&gt;</code> with <code class="language-plaintext highlighter-rouge">&lt;receive-mesh ... /&gt;</code>.</li>
-  <li>Remove <code class="language-plaintext highlighter-rouge">&lt;extraplation-order value="..." /&gt;</code> in <code class="language-plaintext highlighter-rouge">&lt;coupling-scheme&gt;</code>.</li>
-  <li>Replace all RBF related <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-... /&gt;</code> tags. RBF mappings are now defined in terms of the applied solver (current options <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-global-direct ...</code>, <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-global-iterative</code> or <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-pum-direct ...</code>) and the applied basis function as a subtag of the solver. Users should use the additionally added auto selection of an appropriate solver, which omits the solver specification, as follows:</li>
-</ul>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;mapping:rbf</span>  <span class="err">...</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;basis-function:...</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/mapping:rbf&gt;</span>
-</code></pre></div></div>
-
-<p>Example:</p>
-
-<p>preCICE version 2 rbf configuration:</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;mapping:compact-polynomial-c0</span> <span class="na">direction=</span><span class="s">"read"</span> <span class="na">from=</span> <span class="s">...</span> <span class="na">support-radius=</span><span class="s">"0.3"</span> <span class="nt">/&gt;</span>
-</code></pre></div></div>
-
-<p>corresponding preCICE version 3 rbf configuration (using the recommended auto selection):</p>
-
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;mapping:rbf</span>  <span class="na">direction=</span><span class="s">"read"</span> <span class="na">from=</span> <span class="s">...</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;basis-function:compact-polynomial-c0</span> <span class="na">support-radius=</span><span class="s">"0.3"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/mapping:rbf&gt;</span>
-</code></pre></div></div>
-
-<p>A specific solver should only be configured if you want to force preCICE to use and stick to a certain solver, independent of your problem size and execution.</p>
-
-<ul>
-  <li>Renamed <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf... use-qr-decomposition="true" /&gt;</code> to <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-global-direct ... &gt; &lt;basis-function:... /&gt; &lt;/mapping:rbf-global-direct&gt;</code>.</li>
-  <li>Remove all timings in the mapping configuration <code class="language-plaintext highlighter-rouge">&lt;mapping: ... timing="initial/onadvance/ondemand" /&gt;</code>.</li>
-  <li>Remove the preallocations in the mapping configuration <code class="language-plaintext highlighter-rouge">&lt;mapping: ... preallocation="tree/compute/estimate/save/off" /&gt;</code>.</li>
-</ul>
-
-<!--
-- Add `<profiling mode="all" />` after the `<log>` tag if you need profiling data.
-- Replace `<export:vtk />` for parallel participants with `<export:vtu />` or `<export:vtp />`.
--->
-
-<ul>
+  <li>Rename the <code class="language-plaintext highlighter-rouge">&lt;m2n: ... /&gt;</code> attributes <code class="language-plaintext highlighter-rouge">from</code> -&gt; <code class="language-plaintext highlighter-rouge">acceptor</code> and <code class="language-plaintext highlighter-rouge">to</code> -&gt; <code class="language-plaintext highlighter-rouge">connector</code>.</li>
   <li>
-    <p>Renamed the <code class="language-plaintext highlighter-rouge">&lt;m2n: ... /&gt;</code> attributes <code class="language-plaintext highlighter-rouge">from</code> -&gt; <code class="language-plaintext highlighter-rouge">acceptor</code> and <code class="language-plaintext highlighter-rouge">to</code> -&gt; <code class="language-plaintext highlighter-rouge">connector</code>.</p>
+    <p>You can now add <code class="language-plaintext highlighter-rouge">&lt;profiling mode="all" /&gt;</code> after the <code class="language-plaintext highlighter-rouge">&lt;log&gt;</code> tag if you need full profiling data.</p>
   </li>
-  <li>
-    <p>Moved and renamed the optional attribute <code class="language-plaintext highlighter-rouge">&lt;read-data: ... waveform-order="1" /&gt;</code> to <code class="language-plaintext highlighter-rouge">&lt;data:scalar/vector ... waveform-degree="1"</code>.</p>
-  </li>
-  <li>We dropped quite some functionality concerning <a href="https://precice.org/configuration-action.html">data actions</a> as these were not used to the best of our knowledge and hard to maintain:
+  <li>Participants
     <ul>
-      <li>Removed deprecated action timings <code class="language-plaintext highlighter-rouge">regular-prior</code>, <code class="language-plaintext highlighter-rouge">regular-post</code>, <code class="language-plaintext highlighter-rouge">on-exchange-prior</code>, and <code class="language-plaintext highlighter-rouge">on-exchange-post</code>.</li>
-      <li>Removed action timings <code class="language-plaintext highlighter-rouge">read-mapping-prior</code>, <code class="language-plaintext highlighter-rouge">write-mapping-prior</code>, and <code class="language-plaintext highlighter-rouge">on-time-window-complete-post</code>.</li>
-      <li>Removed <code class="language-plaintext highlighter-rouge">ComputeCurvatureAction</code> and <code class="language-plaintext highlighter-rouge">ScaleByDtAction</code> actions.</li>
-      <li>Removed callback functions <code class="language-plaintext highlighter-rouge">vertexCallback</code> and <code class="language-plaintext highlighter-rouge">postAction</code> from <code class="language-plaintext highlighter-rouge">PythonAction</code> interface.</li>
-      <li>Removed timewindowsize from the <code class="language-plaintext highlighter-rouge">performAction</code> signature of <code class="language-plaintext highlighter-rouge">PythonAction</code>. The new signature is <code class="language-plaintext highlighter-rouge">performAction(time, data)</code></li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">&lt;use-mesh provide="true" ... /&gt;</code> with <code class="language-plaintext highlighter-rouge">&lt;provide-mesh ... /&gt;</code>, and <code class="language-plaintext highlighter-rouge">&lt;use-mesh provide="false" ... /&gt;</code> with <code class="language-plaintext highlighter-rouge">&lt;receive-mesh ... /&gt;</code>.</li>
+      <li>Move and rename the optional attribute <code class="language-plaintext highlighter-rouge">&lt;read-data: ... waveform-order="1" /&gt;</code> to <code class="language-plaintext highlighter-rouge">&lt;data:scalar/vector ... waveform-degree="1"</code>.</li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">&lt;export:vtk /&gt;</code> for parallel participants with <code class="language-plaintext highlighter-rouge">&lt;export:vtu /&gt;</code> or <code class="language-plaintext highlighter-rouge">&lt;export:vtp /&gt;</code>.</li>
+      <li>Replace mapping constraint <code class="language-plaintext highlighter-rouge">scaled-consistent</code> with <code class="language-plaintext highlighter-rouge">scaled-consistent-surface</code>.</li>
+      <li>Remove all timings in the mapping configuration <code class="language-plaintext highlighter-rouge">&lt;mapping: ... timing="initial/onadvance/ondemand" /&gt;</code>. preCICE now fully controls the mapping.</li>
+      <li>Remove the preallocations in the mapping configuration <code class="language-plaintext highlighter-rouge">&lt;mapping: ... preallocation="tree/compute/estimate/save/off" /&gt;</code>. We always use the superior <code class="language-plaintext highlighter-rouge">tree</code> method.</li>
+      <li>
+        <p>Replace all RBF related <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-... /&gt;</code> tags. RBF mappings are now defined in terms of the applied solver (current options <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-global-direct ...</code>, <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-global-iterative</code> or <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-pum-direct ...</code>) and the applied basis function as a subtag of the solver. Users should use the additionally added auto selection of an appropriate solver, which omits the solver specification, as follows:</p>
+
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;mapping:rbf</span>  <span class="err">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;basis-function:...</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/mapping:rbf&gt;</span>
+</code></pre></div>        </div>
+
+        <p>Example:</p>
+
+        <p>preCICE version 2 RBF configuration:</p>
+
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;mapping:compact-polynomial-c0</span> <span class="na">direction=</span><span class="s">"read"</span> <span class="na">from=</span> <span class="s">...</span> <span class="na">support-radius=</span><span class="s">"0.3"</span> <span class="nt">/&gt;</span>
+</code></pre></div>        </div>
+
+        <p>corresponding preCICE version 3 RBF configuration (using the recommended auto selection):</p>
+
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;mapping:rbf</span>  <span class="na">direction=</span><span class="s">"read"</span> <span class="na">from=</span> <span class="s">...</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;basis-function:compact-polynomial-c0</span> <span class="na">support-radius=</span><span class="s">"0.3"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/mapping:rbf&gt;</span>
+</code></pre></div>        </div>
+
+        <p>A specific solver should only be configured if you want to force preCICE to use and stick to a certain solver, independent of your problem size and execution.</p>
+      </li>
+      <li>Rename <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf... use-qr-decomposition="true" /&gt;</code> to <code class="language-plaintext highlighter-rouge">&lt;mapping:rbf-global-direct ... &gt; &lt;basis-function:... /&gt; &lt;/mapping:rbf-global-direct&gt;</code>.</li>
+      <li>We dropped quite some functionality concerning <a href="https://precice.org/configuration-action.html">data actions</a> as these were not used to the best of our knowledge and were hard to maintain:
+        <ul>
+          <li>Removed deprecated action timings <code class="language-plaintext highlighter-rouge">regular-prior</code>, <code class="language-plaintext highlighter-rouge">regular-post</code>, <code class="language-plaintext highlighter-rouge">on-exchange-prior</code>, and <code class="language-plaintext highlighter-rouge">on-exchange-post</code>.</li>
+          <li>Removed action timings <code class="language-plaintext highlighter-rouge">read-mapping-prior</code>, <code class="language-plaintext highlighter-rouge">write-mapping-prior</code>, and <code class="language-plaintext highlighter-rouge">on-time-window-complete-post</code>.</li>
+          <li>Removed <code class="language-plaintext highlighter-rouge">ComputeCurvatureAction</code> and <code class="language-plaintext highlighter-rouge">ScaleByDtAction</code> actions.</li>
+          <li>Removed callback functions <code class="language-plaintext highlighter-rouge">vertexCallback</code> and <code class="language-plaintext highlighter-rouge">postAction</code> from <code class="language-plaintext highlighter-rouge">PythonAction</code> interface.</li>
+          <li>Removed timewindowsize from the <code class="language-plaintext highlighter-rouge">performAction</code> signature of <code class="language-plaintext highlighter-rouge">PythonAction</code>. The new signature is <code class="language-plaintext highlighter-rouge">performAction(time, data)</code></li>
+          <li>Using actions with multiple couping schemes and mixed time window sizes is not well defined!</li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li>
-    <p>Replace <code class="language-plaintext highlighter-rouge">&lt;min-iteration-convergence-measure min-iterations="3" ... /&gt;</code> by <code class="language-plaintext highlighter-rouge">&lt;min-iterations value="3"/&gt;</code>.</p>
+  <li>Coupling schemes
+    <ul>
+      <li>Remove <code class="language-plaintext highlighter-rouge">&lt;extraplation-order value="..." /&gt;</code> in <code class="language-plaintext highlighter-rouge">&lt;coupling-scheme&gt;</code>. Contact us if you need this feature.</li>
+      <li>Replace <code class="language-plaintext highlighter-rouge">&lt;min-iteration-convergence-measure min-iterations="3" ... /&gt;</code> by <code class="language-plaintext highlighter-rouge">&lt;min-iterations value="3"/&gt;</code>. Not defining convergence measures leads to iterations until <code class="language-plaintext highlighter-rouge">max-iterations</code> is reached.</li>
+      <li>We removed the plain <code class="language-plaintext highlighter-rouge">Broyden</code> acceleration. You could use <code class="language-plaintext highlighter-rouge">IQN-IMVJ</code> instead, which is a <a href="http://hdl.handle.net/2117/191193">multi-vector Broyden variant</a>.</li>
+    </ul>
   </li>
-  <li>We removed the plain <code class="language-plaintext highlighter-rouge">Broyden</code> acceleration. You could use <code class="language-plaintext highlighter-rouge">IQN-IMVJ</code> instead, which is a <a href="http://hdl.handle.net/2117/191193">multi-vector Broyden variant</a>.</li>
+</ul>
+
+<h2 id="building-precice">Building preCICE</h2>
+
+<p>Rename CMake configuration variables as follows:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_PETScMapping</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_PETSC_MAPPING</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_MPICommunication</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_MPI_COMMUNICATION</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_Packages</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_CONFIGURE_PACKAGE_GENERATION</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_PythonActions</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_PYTHON_ACTIONS</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_ENABLE_C</code> -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_BINDINGS_C</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_ENABLE_FORTRAN</code> -&gt;<code class="language-plaintext highlighter-rouge">PRECICE_BINDINGS_FORTRAN</code></li>
+  <li><code class="language-plaintext highlighter-rouge">PRECICE_ENABLE_LIBBACKTRACE</code>  -&gt; <code class="language-plaintext highlighter-rouge">PRECICE_FEATURE_LIBBACKTRACE_STACKTRACES</code></li>
 </ul>
 
 <h2 id="language-bindings">Language bindings</h2>
@@ -1795,7 +1837,7 @@ Please add breaking changes here when merged to the <code class="language-plaint
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Feb 1, 2024 <br />
+		 Site last generated: Feb 2, 2024 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
