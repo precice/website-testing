@@ -1525,8 +1525,17 @@ $('#toc').on('click', 'a', function() {
     <span class="n">precice</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">double</span><span class="o">&gt;</span>   <span class="n">values</span><span class="p">)</span>
 </code></pre></div></div>
 
-<!-- TODO Also point to section where `relativeReadTime` is explained? We will probably solve this in https://github.com/precice/precice.github.io/pull/257 -->
-<p>Similarly, there is a <code class="language-plaintext highlighter-rouge">readData</code> API function for reading coupling data.</p>
+<p>Similarly, there is a <code class="language-plaintext highlighter-rouge">readData</code> API function for reading coupling data:</p>
+
+<div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="n">readData</span><span class="p">(</span>
+    <span class="n">precice</span><span class="o">::</span><span class="n">string_view</span>          <span class="n">meshName</span><span class="p">,</span>
+    <span class="n">precice</span><span class="o">::</span><span class="n">string_view</span>          <span class="n">dataName</span><span class="p">,</span>
+    <span class="n">precice</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">VertexID</span><span class="o">&gt;</span> <span class="n">vertices</span><span class="p">,</span>
+    <span class="kt">double</span>                        <span class="n">relativeReadTime</span><span class="p">,</span>
+    <span class="n">precice</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span>         <span class="n">values</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The relative read time can be anything from the current point in time (<code class="language-plaintext highlighter-rouge">0</code>) to the end of the time window (<code class="language-plaintext highlighter-rouge">getMaxTimeStepSize())</code>. We will talk about the additional argument <code class="language-plaintext highlighter-rouge">relativeReadTime</code> in detail in <a href="couple-your-code-waveform.html">the section on time interpolation</a>.</p>
 
 <p>Let’s define coupling meshes and access coupling data in our example code:</p>
 
@@ -1631,7 +1640,7 @@ $('#toc').on('click', 'a', function() {
                         <footer>
 	<div class="row text-center">
 
-		 Site last generated: Feb 2, 2024 <br />
+		 Site last generated: Feb 8, 2024 <br />
 
 		<a class="no-icon" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 			<img alt="Creative Commons License" src="images/licensebutton-by-40_88x31.png" />
