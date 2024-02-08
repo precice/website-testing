@@ -1571,7 +1571,7 @@ You may <a href="https://github.com/precice/precice/pull/343">contribute here</a
 
 <h2 id="troubleshooting">Troubleshooting</h2>
 
-<h3 id="solverinterfacehpp-cannot-be-found"><code class="language-plaintext highlighter-rouge">SolverInterface.hpp</code> cannot be found</h3>
+<h3 id="precicehpp-cannot-be-found"><code class="language-plaintext highlighter-rouge">precice.hpp</code> cannot be found</h3>
 
 <p>There are two reasons you may be getting this error:</p>
 
@@ -1580,7 +1580,7 @@ You may <a href="https://github.com/precice/precice/pull/343">contribute here</a
   <li>you are including the file as <code class="language-plaintext highlighter-rouge">SolverInterface.hpp</code> and not as <code class="language-plaintext highlighter-rouge">precice/SolverInterface.hpp</code></li>
 </ul>
 
-<h3 id="solverinterfacech-cannot-be-found"><code class="language-plaintext highlighter-rouge">SolverInterfaceC.h</code> cannot be found</h3>
+<h3 id="precicech-cannot-be-found"><code class="language-plaintext highlighter-rouge">preciceC.h</code> cannot be found</h3>
 
 <p>If you are using the C bindings, please note that they are now installed in <code class="language-plaintext highlighter-rouge">[prefix]/include/precice/</code>, alongside the C++ headers. If your code includes e.g. <code class="language-plaintext highlighter-rouge">precice/bindings/c/SolverInterfaceC.h</code>, please update this to <code class="language-plaintext highlighter-rouge">precice/SolverInterfaceC.h</code>.</p>
 
@@ -1599,7 +1599,7 @@ You may <a href="https://github.com/precice/precice/pull/343">contribute here</a
 
 <h3 id="preciceversionh-cannot-be-found"><code class="language-plaintext highlighter-rouge">precice/Version.h</code> cannot be found</h3>
 
-<p>Version 2.5 introduces the <code class="language-plaintext highlighter-rouge">precice/Version.h</code> header and includes it by default in <code class="language-plaintext highlighter-rouge">precice.hpp</code> and <code class="language-plaintext highlighter-rouge">SolverInterfaceC.h</code>.
+<p>Version 2.5 introduces the <code class="language-plaintext highlighter-rouge">precice/Version.h</code> header and includes it by default in <code class="language-plaintext highlighter-rouge">precice.hpp</code> and <code class="language-plaintext highlighter-rouge">preciceC.h</code>.
 This file is generated during the preCICE build and not part of the sources.</p>
 
 <p>If you are using preCICE directly from the build directory without the help of pkg-config nor CMake, then you are likely missing an include-directory.

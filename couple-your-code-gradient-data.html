@@ -1524,14 +1524,15 @@ The values are passed as following:</p>
 
 <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">precice</span><span class="o">::</span><span class="n">Participant</span> <span class="nf">precice</span><span class="p">(</span><span class="s">"FluidSolver"</span><span class="p">,</span> <span class="s">"precice-config.xml"</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span> <span class="c1">// constructor</span>
 
-<span class="kt">int</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshDimensions</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">meshDim</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshDimensions</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">);</span>
+<span class="kt">int</span> <span class="n">dataDim</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshDimensions</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="s">"Stress"</span><span class="p">);</span>
 <span class="cm">/* ... */</span>
-<span class="n">precice</span><span class="p">.</span><span class="n">setMeshVertices</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="n">vertexSize</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">);</span>
+<span class="n">precice</span><span class="p">.</span><span class="n">setMeshVertices</span><span class="p">(</span><span class="s">"FluidMesh"</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">);</span>
 
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">stress</span><span class="p">(</span><span class="n">vertexSize</span> <span class="o">*</span> <span class="n">dim</span><span class="p">);</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">stress</span><span class="p">(</span><span class="n">vertexSize</span> <span class="o">*</span> <span class="n">dataDim</span><span class="p">);</span>
 
 <span class="c1">// create gradient data</span>
-<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">stressGradient</span><span class="p">(</span><span class="n">vertexSize</span> <span class="o">*</span> <span class="n">dim</span> <span class="o">*</span> <span class="n">dim</span><span class="p">)</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">stressGradient</span><span class="p">(</span><span class="n">vertexSize</span> <span class="o">*</span> <span class="n">dataDim</span> <span class="o">*</span> <span class="n">meshDim</span><span class="p">)</span>
 <span class="cm">/* ... */</span>
 <span class="n">precice</span><span class="p">.</span><span class="n">initialize</span><span class="p">();</span>
 

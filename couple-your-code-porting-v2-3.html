@@ -1502,10 +1502,6 @@ Missing:
 #1352
 -->
 
-<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> 
-Please add breaking changes here when merged to the <code class="language-plaintext highlighter-rouge">develop</code> branch.
-</div>
-
 <h2 id="precice-api">preCICE API</h2>
 
 <!-- Split code block. See https://github.com/precice/precice.github.io/commit/74e377cece4a221e00b5c56b1db3942ec70a6272. -->
@@ -1539,8 +1535,8 @@ Please add breaking changes here when merged to the <code class="language-plaint
 - int forceID = precice.getDataID("Forces", meshID);
 - std::vector&lt;double&gt; forces(vertexSize*dim);
 - std::vector&lt;double&gt; displacements(vertexSize*dim);
-</span><span class="gi">+ const double forceDim = participant.getDataDimensions("FluidMesh", "Forces")
-+ const double displDim = participant.getDataDimensions("FluidMesh", "Displacements")
+</span><span class="gi">+ const int forceDim = participant.getDataDimensions("FluidMesh", "Forces")
++ const int displDim = participant.getDataDimensions("FluidMesh", "Displacements")
 + std::vector&lt;double&gt; forces(vertexSize*forceDimn);
 + std::vector&lt;double&gt; displacements(vertexSize*displDim);
 </span>  
@@ -1596,7 +1592,7 @@ Please add breaking changes here when merged to the <code class="language-plaint
 </code></pre></div></div>
 
 <ul>
-  <li>The main preCICE header file was renamed. This means that you need to:
+  <li>The main preCICE header file and the main object was renamed. This means that you need to:
     <ul>
       <li>Replace <code class="language-plaintext highlighter-rouge">#include "precice/SolverInterface.hpp"</code> with <code class="language-plaintext highlighter-rouge">#include "precice/precice.hpp"</code>.</li>
       <li>Where declaring a preCICE object, replace the <code class="language-plaintext highlighter-rouge">precice::SolverInterface</code> type with <code class="language-plaintext highlighter-rouge">precice::Participant</code>.</li>
@@ -1620,7 +1616,7 @@ Please add breaking changes here when merged to the <code class="language-plaint
     <ul>
       <li>Remove the now obsolete calls to <code class="language-plaintext highlighter-rouge">getMeshID()</code> and <code class="language-plaintext highlighter-rouge">getDataID()</code> and any related variables / user-defined types.</li>
       <li>Replace the use of mesh IDs with the mesh name.</li>
-      <li>Replace the use of data IDs with the respective mesh and data names.</li>
+      <li>Replace the use of data IDs with the respective mesh and data names (both are needed).</li>
     </ul>
   </li>
   <li>Migrate connectivity information to the vertex-only API. All <code class="language-plaintext highlighter-rouge">setMeshX</code> methods take vertex IDs as input and return nothing.
@@ -1716,10 +1712,10 @@ Please add breaking changes here when merged to the <code class="language-plaint
 
 <p>Typical error message that should lead you here:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error: ‘class precice::SolverInterface’ has no member named ‘initializeData’<span class="p">;</span> did you mean ‘initialize’?
-   63 |   couplingInterface.initializeData<span class="o">()</span><span class="p">;</span>
-      |                     ^~~~~~~~~~~~~~
-      |                     initialize
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error: ‘class precice::Participant’ has no member named ‘initializeData’<span class="p">;</span> did you mean ‘initialize’?
+   63 |   precice.initializeData<span class="o">()</span><span class="p">;</span>
+      |           ^~~~~~~~~~~~~~
+      |           initialize
 </code></pre></div></div>
 
 <h2 id="precice-configuration-file">preCICE configuration file</h2>

@@ -1511,7 +1511,7 @@ These API functions are work in progress, experimental, and are not yet released
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">otherMesh</span> <span class="o">=</span> <span class="s">"ReceivedMeshName"</span><span class="p">;</span>
 
     <span class="c1">// Get the spacial dimensionality of the mesh</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">dims</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshDimensions</span><span class="p">(</span><span class="n">otherMesh</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">dim</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshDimensions</span><span class="p">(</span><span class="n">otherMesh</span><span class="p">);</span>
 
     <span class="c1">// Allocate and fill the  'boundingBox' according to the interested region</span>
     <span class="c1">// with the desired bounds, in our example we use the unit cube.</span>
@@ -1543,8 +1543,8 @@ These API functions are work in progress, experimental, and are not yet released
 
     <span class="c1">// continue with time loop and write data directly to the mesh using</span>
     <span class="c1">// the received ids, which correspond to the vertices</span>
-    <span class="k">const</span> <span class="kt">int</span> <span class="n">dataDims</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getDataDimensions</span><span class="p">(</span><span class="n">otherMesh</span><span class="p">,</span> <span class="s">"OtherData"</span><span class="p">);</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">(</span><span class="n">dataDims</span> <span class="o">*</span> <span class="n">otherMeshSize</span><span class="p">);</span>
+    <span class="k">const</span> <span class="kt">int</span> <span class="n">dataDim</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getDataDimensions</span><span class="p">(</span><span class="n">otherMesh</span><span class="p">,</span> <span class="s">"OtherData"</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">data</span><span class="p">(</span><span class="n">dataDim</span> <span class="o">*</span> <span class="n">otherMeshSize</span><span class="p">);</span>
     <span class="n">precice</span><span class="p">.</span><span class="n">writeData</span><span class="p">(</span><span class="n">otherMesh</span><span class="p">,</span> <span class="s">"OtherData"</span><span class="p">,</span> <span class="n">otherVertexIDs</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
 
 </code></pre></div></div>

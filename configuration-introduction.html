@@ -1523,15 +1523,8 @@ On this page, you also find references to the preCICE API. If you are only using
 <p>You need to define which data values the coupled solvers want to exchange, e.g. displacements, forces, velocities, or temperature.</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;data:scalar</span> <span class="na">name=</span><span class="s">"Temperature"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;data:vector</span> <span class="na">name=</span><span class="s">"Forces"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;data:vector</span> <span class="na">name=</span><span class="s">"Force"</span><span class="nt">/&gt;</span>
 </code></pre></div></div>
-
-<p>Once you have defined these fields, you can use the preCICE API to access them:</p>
-
-<!-- TODO: needs update -->
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">temperatureID</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getDataID</span><span class="p">(</span><span class="s">"Temperature"</span><span class="p">,</span> <span class="n">meshID</span><span class="p">);</span>
-</code></pre></div></div>
-
 <h2 id="2-coupling-meshes">2. Coupling meshes</h2>
 
 <p>Next, you can define the interface coupling meshes.</p>
@@ -1542,13 +1535,7 @@ On this page, you also find references to the preCICE API. If you are only using
 <span class="nt">&lt;/mesh&gt;</span> 
 </code></pre></div></div>
 
-<p>The value <code class="language-plaintext highlighter-rouge">dimensions</code> needs to match the physical dimension of your simulation, i.e. the number of coordinates a vertex has in <code class="language-plaintext highlighter-rouge">setMeshVertex</code>, etc. Some solvers only support 3D simulation, such as OpenFOAM or CalculiX. In this case the adapter maps from 3D to 2D if the preCICE dimension is 2D. This, of course, only works if you simulate a quasi-2D scenario with one layer of cells in z direction.</p>
-
-<p>With the preCICE API, you get an ID for each mesh:</p>
-
-<!-- TODO: needs update -->
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">meshID</span> <span class="o">=</span> <span class="n">precice</span><span class="p">.</span><span class="n">getMeshID</span><span class="p">(</span><span class="s">"MyMesh1"</span><span class="p">);</span>
-</code></pre></div></div>
+<p>The value <code class="language-plaintext highlighter-rouge">dimensions</code> needs to match the physical dimension of the mesh, i.e. the number of coordinates a vertex has in <code class="language-plaintext highlighter-rouge">setMeshVertex</code>, etc. Some solvers only support 3D simulation, such as OpenFOAM or CalculiX. In this case the adapter maps from 3D to 2D if the mesh dimension is 2D. This, of course, only works if you simulate a quasi-2D scenario with one layer of cells in z direction.</p>
 
 <h2 id="3-coupling-participants">3. Coupling participants</h2>
 
@@ -1564,14 +1551,14 @@ On this page, you also find references to the preCICE API. If you are only using
 <span class="nt">&lt;/participant&gt;</span>
 </code></pre></div></div>
 
-<p>The name of the participant has to coincide with the name you give when creating the preCICE interface object in the adapter:</p>
+<p>The name of the participant has to coincide with the name you give when creating the participant object in the adapter:</p>
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">precice</span><span class="o">::</span><span class="n">Participant</span> <span class="nf">precice</span><span class="p">(</span><span class="s">"MySolver1"</span><span class="p">,</span><span class="n">rank</span><span class="p">,</span><span class="n">size</span><span class="p">);</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">precice</span><span class="o">::</span><span class="n">Participant</span> <span class="nf">precice</span><span class="p">(</span><span class="s">"MySolver1"</span><span class="p">,</span> <span class="s">"precice-config.xml"</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>The participant <code class="language-plaintext highlighter-rouge">provides</code> the mesh. This means that you have to define the coordinates:</p>
 
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">precice</span><span class="p">.</span><span class="n">setMeshVertices</span><span class="p">(</span><span class="n">meshID</span><span class="p">,</span> <span class="n">vertexSize</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">);</span>
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">precice</span><span class="p">.</span><span class="n">setMeshVertices</span><span class="p">(</span><span class="s">"MyMesh1"</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">vertexIDs</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>The other option is to receive the mesh coordinates from another participant (who defines them):</p>
@@ -1594,7 +1581,7 @@ On this page, you also find references to the preCICE API. If you are only using
 
 <p>If two participants should exchange data, they need a communication channel.</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;m2n:sockets</span> <span class="na">from=</span><span class="s">"MySolver1"</span> <span class="na">to=</span><span class="s">"MySolver2"</span> <span class="nt">/&gt;</span>   
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;m2n:sockets</span> <span class="na">acceptor=</span><span class="s">"MySolver1"</span> <span class="na">connector=</span><span class="s">"MySolver2"</span> <span class="nt">/&gt;</span>   
 </code></pre></div></div>
 
 <p>Read more about the <a href="configuration-communication.html">communication configuration</a>.</p>
@@ -1621,7 +1608,7 @@ On this page, you also find references to the preCICE API. If you are only using
 
 <p>will return <code class="language-plaintext highlighter-rouge">false</code>. The <code class="language-plaintext highlighter-rouge">time-window-size</code>, is the coupling time window (= coupling time step) length. This means if a solver uses a smaller time step size, he subcycles, i.e. needs more smaller time steps until data is exchanged.</p>
 
-<p>Both participants need to <code class="language-plaintext highlighter-rouge">use</code> the mesh over which data is <code class="language-plaintext highlighter-rouge">exchanged</code> (here <code class="language-plaintext highlighter-rouge">MyMesh2</code>).</p>
+<p>Both participants need to either <code class="language-plaintext highlighter-rouge">provide</code> or <code class="language-plaintext highlighter-rouge">receive</code> the mesh over which data is <code class="language-plaintext highlighter-rouge">exchanged</code> (here <code class="language-plaintext highlighter-rouge">MyMesh2</code>).</p>
 
 <p>For implicit coupling, i.e. both solver subiterate in every time window until convergence, the configuration looks a bit more complicated.</p>
 
